@@ -1,10 +1,11 @@
 # ¿Qué Hacemos Hoy?
 
-### Curso Escolar 2021-2022
-### Autor: [Acosta Tenero, Alicia](https://github.com/Alicia115/Proyecto_DAW/) 
-### Tutor: [Chema Durán](https://github.com/chemaduran/)
-### Fecha de Inicio: 18-03-2022
-### Fecha de Finalización: DD-MM-YYYY
+#### Curso Escolar 2021-2022
+#### Autor: [Acosta Tenero, Alicia](https://github.com/Alicia115/Proyecto_DAW/) 
+#### Tutor: [Chema Durán](https://github.com/chemaduran/)
+#### Fecha de Inicio: 18-03-2022
+#### Fecha de Finalización: DD-MM-YYYY
+
 
 
 ## Breve descripción del proyecto
