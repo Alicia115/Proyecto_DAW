@@ -1,8 +1,8 @@
 # ¿Qué Hacemos Hoy?
 
 Curso Escolar 2021-2022
-Autor: Acosta Tenero, Alicia (https://github.com/Alicia115/Proyecto_DAW) 
-Tutor: Chema Durán (https://github.com/chemaduran)
+Autor: [Acosta Tenero, Alicia](https://github.com/Alicia115/Proyecto_DAW/) 
+Tutor: [Chema Durán](https://github.com/chemaduran/)
 Fecha de Inicio: 18-03-2022
 Fecha de Finalización: DD-MM-YYYY
 Breve descripción del proyecto
@@ -30,3 +30,5 @@ En este apartado el alumno explicará el contenido del repositorio y de todas la
 Demostración del proyecto
 
 Vídeo demostrativo que contenga una pequeña demostración de la apariencia del proyecto y de aquello que el proyecto puede hacer. (No más de 2 minutos).
+
+
