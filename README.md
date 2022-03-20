@@ -8,12 +8,16 @@
 
 
 
-## Breve descripción del proyecto
+## Descripción del Proyecto
+¿No sabes qué hacer un domingo? ¿Nunca te enteras de los eventos que hay por tu ciudad o alrededores? ¿Sabías que durante todo el año es posible que haya alguna festividad cerca de tí? ¿No? ¡Eso dejará de ser un problema!
 
-Si ya tienes una idea para tu aplicación, explícala brevemente. Si no es así, lo que realmente necesitas es buscar un problema o necesidad a la que darle solución, y estos están por todas partes. Así que trata de buscar problemas o necesidades en tu vida diaria y realiza una lista. Una vez que tengas una lista exhaustiva, ya puedes empezar a pensar en cómo puedes resolverlos.
+¿Qué hacemos hoy? es un buscador web de eventos sociaculturales a nivel España. Desde conciertos u obras teatrales hasta ferias gastronómicas o carnavales. El usuario a través de diferentes filtros (fecha, tipo de actividad, provincia, coste, etc.) podrá encontrar los eventos más próximos a la provincia seleccionada y alrededores, y en caso de ser de pago acceder por medio de un enlace a la página oficial de venta de éste. 
+Mediante previo registro y acceso a su perfil, el usuario podrá guardar eventos o añadirlos a su calendario de notificaciones.
+Por su parte, el administrador será el encargado de añadir nuevos eventos.  
 
-En este apartado el alumno debe hacer una breve descripción del proyecto que vaya a realizar. Esta descripción no será ua descripción detallada, será una presentación general con no más de 10 líneas.
-Definir el objetivo de la aplicación
+
+## Objetivo de la Aplicación
+
 
 Tener una gran idea o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes definir claramente el propósito y la misión de la aplicación web:
 
