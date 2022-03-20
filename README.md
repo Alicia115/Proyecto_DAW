@@ -22,16 +22,20 @@ El objetivo principal de la aplicación es que el usuario disponga de un buscado
 A su misma vez, la aplicación busca promover la cultura y dar a conocer eventos de todas las provincias, pueblos, ciudades, etc. 
 
 * #### ¿Qué va a hacer la aplicación?
-La aplicación 
+La aplicación va a generar una lista de posibles planes para el usuario, filtrándose en un primer momento según la disponibilidad, tipo de actividad y provincia que el usuario disponga y desee, y posteriormente pudiendo modificar filtros anteriores e incluso acotar más su búsqueda añadiendo su coste o restringiendo el lugar en los pueblos de la provincia. Dicha lista ofrecerá una información detallada, así como hora y lugar, del evento seleccionado, que si es de coste ofrecerá un enlace a la página oficial de compra de la entrada. Si el usuario está registrado podrá guardar o añadir al calendario dicho evento. 
 
-Tener una gran idea o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes definir claramente el propósito y la misión de la aplicación web:
+* #### ¿Cuál es su atractivo principal?
+Su atractivo principal es la facilidad, limpieza y garantía de una página web que reúna todos los eventos de cualquier lugar de España, con una buscador tan personalizado para el usuario.
 
-    ¿Qué va a hacer la aplicación?
-    ¿Cuál es su atractivo principal?
-    ¿Qué problema concreto va a resolver?
-    ¿Qué necesidad va a cubrir?
+* #### ¿Qué problema concreto va a resolver?
+El problema concreto que va a resolver la aplicación es la unificación de todo evento de cualquier tipo en una misma plataforma, de manera limpia y sencilla.
 
-Prototipo de la Interfaz del proyecto
+* #### ¿Qué necesidad va a cubrir?
+Esta aplicación pretende cubrir las necesidades socioculturales del usuario, dándole la oportunidad de encontrar un plan de forma rápida y personalizada.
+
+
+
+## Prototipo de la Interfaz del Proyecto
 
 En este apartado el alumno insertará la documentación del prototipo del proyecto (sketch, wireframe, mockup y un prototipo HTML y CSS) que permite al cliente previsualizar el resultado final del producto que se está desarrollando.
 
