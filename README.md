@@ -1,11 +1,13 @@
 # ¿Qué Hacemos Hoy?
 
-Curso Escolar 2021-2022
-Autor: [Acosta Tenero, Alicia](https://github.com/Alicia115/Proyecto_DAW/) 
-Tutor: [Chema Durán](https://github.com/chemaduran/)
-Fecha de Inicio: 18-03-2022
-Fecha de Finalización: DD-MM-YYYY
-Breve descripción del proyecto
+###Curso Escolar 2021-2022
+###Autor: [Acosta Tenero, Alicia](https://github.com/Alicia115/Proyecto_DAW/) 
+###Tutor: [Chema Durán](https://github.com/chemaduran/)
+###Fecha de Inicio: 18-03-2022
+###Fecha de Finalización: DD-MM-YYYY
+
+
+##Breve descripción del proyecto
 
 Si ya tienes una idea para tu aplicación, explícala brevemente. Si no es así, lo que realmente necesitas es buscar un problema o necesidad a la que darle solución, y estos están por todas partes. Así que trata de buscar problemas o necesidades en tu vida diaria y realiza una lista. Una vez que tengas una lista exhaustiva, ya puedes empezar a pensar en cómo puedes resolverlos.
 
