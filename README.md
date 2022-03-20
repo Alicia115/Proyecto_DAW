@@ -21,7 +21,7 @@ Por su parte, el administrador será el encargado de añadir nuevos eventos.
 El objetivo principal de la aplicación es que el usuario disponga de un buscador completo de eventos socioculturales a nivel España, puediendo encontrar un plan los más ajustado posible a sus necesidades. 
 A su misma vez, la aplicación busca promover la cultura y dar a conocer eventos de todas las provincias, pueblos, ciudades, etc. 
 
-* ¿Qué va a hacer la aplicación?
+* #### ¿Qué va a hacer la aplicación?
 La aplicación 
 
 Tener una gran idea o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes definir claramente el propósito y la misión de la aplicación web:
