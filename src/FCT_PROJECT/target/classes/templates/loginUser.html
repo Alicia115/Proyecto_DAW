@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/materialize::head(title='menu.register')"></head>
+
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+	<section class="container">
+		<div class="row">
+			<article class="col s6 offset-s3">
+				<form method="POST" action="#" th:action="@{/login}" th:object="${usuario}">
+
+					<div class="input-field">
+						<i class="material-icons prefix" style="color: #27D9C7">assignment_ind</i>
+						<label for="username" style="color:#105952">Nombre de Usuario</label>
+						<input type="text" name="username" id="username" required>
+					</div>
+
+					<div class="input-field">
+						<i class="material-icons prefix" style="color: #27D9C7">https</i>
+						<label for="password" style="color:#105952">Contraseña</label>
+						<input type="password" name="password" id="password" required>
+					</div>
+
+
+					<p class="center-align">
+						<button class="waves-effect waves-light btn" type="submit"
+							style="background-color: #27D9C7">INICIAR SESIÓN</button>
+					</p>
+					
+					<h6><a href="/register" style="color: #27D9C7">Registro nuevo usuario </a></h6>  
+
+				</form>
+
+			</article>
+		</div>
+	</section>
+	<footer th:replace="fragments/parts::footer"></footer>
+</body>
+
+</html>

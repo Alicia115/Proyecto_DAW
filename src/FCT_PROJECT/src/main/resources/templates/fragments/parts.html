@@ -1,0 +1,37 @@
+<meta charset="UTF-8">
+<header th:fragment="menu">
+	<div>
+		<nav class="nav-content">
+			<div class="nav-wrapper" style="background-color: #27D9C7">
+				<img class="brand-logo" width="50" src="/img/logo.png">
+
+				<ul class="right hide-on-med-and-down">
+					<li><a href="sass.html"><i class="material-icons left">search</i></a></li>
+					<li>
+						<a class="waves-effect waves-light btn-floating social google"><i class="fa fa-google"></i></a>
+					</li>
+					<li>
+						<a class="waves-effect waves-light btn-floating facebook"><i class="fa fa-facebook"></i></a>
+					</li>
+					<li>
+						<a class="waves-effect waves-light btn-floating github"><i class="fa fa-github"></i></a>
+					</li>
+					<li><a href="/login">Iniciar Sesión</a></li>
+				</ul>
+			</div>
+</header>
+
+
+<footer th:fragment="footer" class="page-footer" style="background-color: #27D9C7">
+	<div class="row">
+		<div class="col s2">
+			<img class="brand-logo center" width="70" src="/img/logo.png">
+		</div>
+		<div class="footer-menu col s10 center">
+			<a class="grey-text text-lighten-3 col s2" href="#!">Sobre Nosotros</a>
+			<a class="grey-text text-lighten-3 col s2" href="#!">¿Nos propones algún evento?</a>
+			<a class="grey-text text-lighten-3 col s2" href="#!">Términos y Condiciones</a>
+			<div class="grey-text text-lighten-3 col s2">© 2022 Copyright</div>
+		</div>
+	</div>
+</footer>
