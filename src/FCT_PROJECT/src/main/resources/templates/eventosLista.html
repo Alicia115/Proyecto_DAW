@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='menu.home')"></head>
+
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+
+	<div class="container">
+		<div class="row">
+			<form method="POST" action="#" th:action="@{/eventos/listaEventos}" th:object="${eventdtolistado}">
+				<div class="row">
+
+					<div class="col" style="margin-top:2rem;">
+						<div class="form-group mb-2">
+							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
+							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
+							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
+								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+								margin-bottom:4rem; width:50%; border-radius:inherit;">
+						</div>
+					</div>
+					<div class="col" style="margin-top:2rem;">
+						<div class="form-group mb-2">
+							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
+							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
+							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
+								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+								margin-bottom:4rem; width:50%; border-radius:inherit;">
+						</div>
+					</div>
+					<div class="col" style="margin-top:2rem;">
+						<div class="form-group mb-2">
+							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
+							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
+							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
+								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+								margin-bottom:4rem; width:50%; border-radius:inherit;">
+						</div>
+					</div>
+
+					<div class="col" style="margin-top:2rem;">
+						<div class="form-group mb-2">
+							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
+							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
+							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
+								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+								margin-bottom:4rem; width:50%; border-radius:inherit;">
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="row">
+			<div class="card" style="width: 18rem;" th:each="event : ${eventosListTipo}">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${event.titulo}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted" th:text="${event.tipo}"></h6>
+					<p class="card-text" th:text="${event.lugar}"></p>
+					<p class="card-text" th:text="${event.coste}"></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="fragments/parts::footer"></footer>
+
+</body>
+
+</html>

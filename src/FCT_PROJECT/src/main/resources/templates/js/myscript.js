@@ -14,8 +14,8 @@ $(document).ready(function() {
 
 //Select
 document.addEventListener('DOMContentLoaded', function() {
-	var elems = document.querySelectorAll('select');
-	var instances = M.FormSelect.init(elems, options);
+	var elems1 = document.querySelectorAll('select');
+	var instances1 = M.FormSelect.init(elems1, options);
 });
 
 // Or with jQuery
@@ -25,13 +25,9 @@ $(document).ready(function() {
 });
 
 //Carrousel
- var instance = M.Carousel.init({
-    fullWidth: true
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems2 = document.querySelectorAll('.carousel');
+    var instances2 = M.Carousel.init(elems2);
   });
 
-  // Or with jQuery
-
-  $('.carousel.carousel-slider').carousel({
-    fullWidth: true
-  });
-     

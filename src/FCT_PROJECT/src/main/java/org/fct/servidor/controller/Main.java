@@ -1,9 +1,14 @@
 package org.fct.servidor.controller;
 
+import java.util.List;
+
+import org.fct.servidor.dto.EventosDTO;
 import org.fct.servidor.dto.UsuarioDTO;
 import org.fct.servidor.dto.UsuarioLoginDTO;
+import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Role;
 import org.fct.servidor.model.Usuario;
+import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,17 +18,67 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class Main {
 
 	@Autowired
 	UsuarioServiceImpl usuarioService;
+	
+	@Autowired
+	EventosServiceImpl eventosService;
 
-	@RequestMapping("/")
-	public String home(Model model) {
+	@GetMapping("/")
+	public String home(@RequestParam(required=false,name="error") String error, Model model) {
+		
+		EventosDTO eventdto = new EventosDTO();
+		List<Eventos> eventos = eventosService.getAllEventos();
+		model.addAttribute("eventos",eventos);
+		model.addAttribute("eventdto",eventdto);
+		model.addAttribute("error",error);
 		model.addAttribute("contenido", "INICIO");
 		return "index";
+	}
+	
+	@PostMapping("/")
+	public String postHome(@ModelAttribute EventosDTO eventdto,Model model) {
+		
+		Eventos eventoTipo = eventosService.getEventoByTipo(eventdto.getTipo());
+		Eventos eventoLugar = eventosService.getEventoByLugar(eventdto.getLugar());
+		Eventos eventoFecha = eventosService.getEventoByFecha(eventdto.getFecha());
+		
+		if(eventoTipo!=null) {
+			
+			return "redirect:/eventos/listaEventos?tipo="+eventoTipo.getTipo();
+			
+		}else {
+			return "redirect:/eventos/listaEventos/";
+		}
+
+	}
+	
+	@GetMapping("/eventos/listaEventos")
+	public String eventosListado(@RequestParam(required = false, name = "tipo") String tipo,
+			@RequestParam(required=false,name="error") String error, Model model) {
+
+		
+		if (tipo == null) {
+			List<Eventos> eventos = eventosService.getAllEventos();
+			model.addAttribute("eventos",eventos);
+			model.addAttribute("error",error);
+			return "eventosLista";
+			
+		} else {
+			EventosDTO eventdtolistado = new EventosDTO();
+			List<Eventos> eventos = eventosService.getAllEventos();
+			List<Eventos> eventosListTipo = eventosService.getEventosByTipo(tipo);
+			model.addAttribute("eventos",eventos);
+			model.addAttribute("eventdtolistado",eventdtolistado);
+			model.addAttribute("eventosListTipo",eventosListTipo);	
+			model.addAttribute("error",error);
+			return "eventosLista";
+		}
 	}
 
 	@GetMapping("/login")
@@ -76,7 +131,6 @@ public class Main {
 		}
 
 		return "redirect:/";
-
 	}
-
+	
 }

@@ -47,7 +47,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		/* URL con información sobre ANT MATCHERS
 		 * https://www.baeldung.com/spring-security-expressions */
 		http.csrf().disable().authorizeRequests()
-		.antMatchers("/").permitAll()
+		.antMatchers("/", "/eventos/listaEventos").permitAll()
 		.antMatchers("/register/", "/login/").not().authenticated()
 		.antMatchers("/asignaturas/*","/profesores/*", "/grados/*").authenticated()
 		.antMatchers("/departments/*").hasRole("ADMIN")
