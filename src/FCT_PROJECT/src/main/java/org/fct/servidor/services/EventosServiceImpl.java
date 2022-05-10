@@ -35,24 +35,6 @@ public class EventosServiceImpl implements EventosService{
 		}
 	}
 
-	public Eventos getEventoByTipo(String tipo) {
-		if(tipo!=null) {
-			Eventos evento = eventosRepo.findByTipo(tipo);
-			return evento;
-		}else {
-			return null;
-		}
-	}
-
-	public Eventos getEventoByLugar(String lugar) {
-		
-		if(lugar!=null) {
-			Eventos evento = eventosRepo.findByLugar(lugar);
-			return evento;
-		}else {
-			return null;
-		}
-	}
 
 	public Eventos getEventoByFecha(Date fecha) {
 		
@@ -64,15 +46,6 @@ public class EventosServiceImpl implements EventosService{
 		}
 	}
 
-	public Eventos getEventoByHora(String hora) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Eventos getEventoByCoste(Double coste) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	public Eventos getEventoByTitulo(String titulo) {
 		
@@ -113,14 +86,34 @@ public class EventosServiceImpl implements EventosService{
 		}
 	}
 
+	@Override
 	public List<Eventos> getEventosByHora(String hora) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
 	public List<Eventos> getEventosByCoste(Double coste) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public List<Eventos> getEventosByTipoAndLugar(String tipo, String lugar) {
+		
+		if(tipo!= null && lugar !=null) {
+			return eventosRepo.findDistinctByTipoAndLugar(tipo, lugar);
+		} else if(tipo!=null ){
+			return eventosRepo.findByTipo(tipo);
+		}else if(lugar!=null) {
+			return eventosRepo.findByLugar(lugar);
+		}
+		else {
+			return eventosRepo.findAll();
+		}
+		
+	}
+
+	
 
 }

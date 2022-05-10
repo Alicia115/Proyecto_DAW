@@ -16,5 +16,6 @@ public interface EventosService {
 	public List <Eventos>  getEventosByFecha(Date fecha);
 	public List <Eventos>  getEventosByHora(String hora);
 	public List <Eventos>  getEventosByCoste(Double coste);
+	public List <Eventos> getEventosByTipoAndLugar(String tipo, String lugar);
 
 }

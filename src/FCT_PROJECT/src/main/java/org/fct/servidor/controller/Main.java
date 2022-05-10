@@ -44,42 +44,28 @@ public class Main {
 	@PostMapping("/")
 	public String postHome(@ModelAttribute EventosDTO eventdto,Model model) {
 		
-		Eventos eventoTipo = eventosService.getEventoByTipo(eventdto.getTipo());
-		Eventos eventoLugar = eventosService.getEventoByLugar(eventdto.getLugar());
-		Eventos eventoFecha = eventosService.getEventoByFecha(eventdto.getFecha());
-		
-		if(eventoTipo!=null) {
+		String tipo = eventdto.getTipo();
+		String lugar = eventdto.getLugar();
 			
-			return "redirect:/eventos/listaEventos?tipo="+eventoTipo.getTipo();
-			
-		}else {
-			return "redirect:/eventos/listaEventos/";
-		}
+		return "redirect:/eventos/listaEventos?tipo="+tipo+"&lugar="+lugar;	
 
-	}
+	} 
 	
 	@GetMapping("/eventos/listaEventos")
-	public String eventosListado(@RequestParam(required = false, name = "tipo") String tipo,
+	public String eventosListado(@RequestParam(required = false, name = "tipo") String tipo, @RequestParam(required = false, name = "lugar") String lugar,
 			@RequestParam(required=false,name="error") String error, Model model) {
 
+		List<Eventos> eventosFiltro = eventosService.getEventosByTipoAndLugar(tipo, lugar);
+		/**
+		Eventos eventoTipo = eventosService.getEventoByTipo(eventdto.getTipo());
+		Eventos eventoLugar = eventosService.getEventoByLugar(eventdto.getLugar());
+		Eventos eventoFecha = eventosService.getEventoByFecha(eventdto.getFecha());*/
 		
-		if (tipo == null) {
-			List<Eventos> eventos = eventosService.getAllEventos();
-			model.addAttribute("eventos",eventos);
-			model.addAttribute("error",error);
-			return "eventosLista";
-			
-		} else {
-			EventosDTO eventdtolistado = new EventosDTO();
-			List<Eventos> eventos = eventosService.getAllEventos();
-			List<Eventos> eventosListTipo = eventosService.getEventosByTipo(tipo);
-			model.addAttribute("eventos",eventos);
-			model.addAttribute("eventdtolistado",eventdtolistado);
-			model.addAttribute("eventosListTipo",eventosListTipo);	
-			model.addAttribute("error",error);
-			return "eventosLista";
-		}
+		model.addAttribute("eventosFiltro",eventosFiltro);
+		model.addAttribute("error",error);
+		return "eventosLista";
 	}
+	
 
 	@GetMapping("/login")
 	public String loginGet(Model model) {

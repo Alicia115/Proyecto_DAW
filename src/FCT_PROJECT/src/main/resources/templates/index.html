@@ -24,7 +24,7 @@
 							<select name="eventos" th:field="*{tipo}" class="form-select form-select-sm"
 								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
 							 margin-bottom:4rem; width:50%; border-radius:inherit;">
-								<option th:each="e : ${eventos}" th:value="${e.id_evento}" th:text="${e.tipo}"></option>
+								<option th:each="e : ${eventos}" th:value="${e.tipo}" th:text="${e.tipo}"></option>
 							</select>
 						</div>
 						<div class="form-group">
@@ -33,7 +33,7 @@
 							<select name="lugar" th:field="*{lugar}" class="form-select form-select-sm"
 								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
 							 margin-bottom:4rem; width:50%; border-radius:inherit;">
-								<option th:each="e : ${eventos}" th:value="${e.id_evento}" th:text="${e.lugar}">
+								<option th:each="e : ${eventos}" th:value="${e.lugar}" th:text="${e.lugar}">
 								</option>
 							</select>
 						</div>
