@@ -1,0 +1,95 @@
+CREATE DATABASE `quehacemoshoy` ;
+
+-- quehacemoshoy.eventos definition
+
+CREATE TABLE `eventos` (
+  `id_evento` int(11) NOT NULL AUTO_INCREMENT,
+  `titulo` varchar(100) NOT NULL,
+  `descripcion` mediumtext DEFAULT NULL,
+  `fecha` date NOT NULL,
+  `lugar` varchar(100) NOT NULL,
+  `tipo` varchar(100) NOT NULL,
+  `horario` datetime DEFAULT NULL,
+  `coste` decimal(10,0) NOT NULL,
+  `hora` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_evento`)
+) ENGINE=InnoDB AUTO_INCREMENT=15424 DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.`role` definition
+
+CREATE TABLE `role` (
+  `id_role` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_role`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.usuario definition
+
+CREATE TABLE `usuario` (
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL,
+  `apellidos` varchar(100) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `activo` varchar(100) NOT NULL DEFAULT '1',
+  `id_role` int(11) DEFAULT 2,
+  PRIMARY KEY (`id_usuario`),
+  KEY `FKcmpcgr4ktfxpk3p8cjag7xces` (`id_role`),
+  CONSTRAINT `FKcmpcgr4ktfxpk3p8cjag7xces` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
+) ENGINE=InnoDB AUTO_INCREMENT=23554 DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.usuario_role definition
+
+CREATE TABLE `usuario_role` (
+  `id_usuario` int(11) NOT NULL,
+  `id_role` int(11) NOT NULL,
+  KEY `usuario_role_FK` (`id_usuario`),
+  KEY `usuario_role_FK_1` (`id_role`),
+  CONSTRAINT `usuario_role_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `usuario_role_FK_1` FOREIGN KEY (`id_role`) REFERENCES `role` (`id_role`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.valoracion definition
+
+CREATE TABLE `valoracion` (
+  `id_usuario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `puntuacion` int(11) NOT NULL,
+  KEY `valoracion_FK` (`id_usuario`),
+  KEY `valoracion_FK_1` (`id_evento`),
+  CONSTRAINT `valoracion_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `valoracion_FK_1` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`id_evento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.comentarios definition
+
+CREATE TABLE `comentarios` (
+  `id_usuario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL,
+  `titulo` varchar(100) NOT NULL,
+  `descripcion` mediumtext DEFAULT NULL,
+  `fecha` date NOT NULL,
+  KEY `comentarios_FK` (`id_usuario`),
+  KEY `comentarios_FK_1` (`id_evento`),
+  CONSTRAINT `comentarios_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `comentarios_FK_1` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`id_evento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+-- quehacemoshoy.guardar_evento definition
+
+CREATE TABLE `guardar_evento` (
+  `id_usuario` int(11) NOT NULL,
+  `id_evento` int(11) NOT NULL,
+  KEY `guardar_evento_FK` (`id_usuario`),
+  KEY `guardar_evento_FK_1` (`id_evento`),
+  CONSTRAINT `guardar_evento_FK` FOREIGN KEY (`id_usuario`) REFERENCES `usuario` (`id_usuario`),
+  CONSTRAINT `guardar_evento_FK_1` FOREIGN KEY (`id_evento`) REFERENCES `eventos` (`id_evento`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
