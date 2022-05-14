@@ -25,7 +25,7 @@ public class Eventos implements Serializable{
 	private String descripcion;
 	
 	@Column(name="fecha",nullable=false)
-	private Date fecha;
+	private String fecha;
 	
 	@Column(nullable=false)
 	private String lugar;
@@ -73,13 +73,18 @@ public class Eventos implements Serializable{
 		this.descripcion = descripcion;
 	}
 
-	public Date getFecha() {
+
+	public String getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(Date fecha) {
+
+
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+
+
 
 	public String getLugar() {
 		return lugar;

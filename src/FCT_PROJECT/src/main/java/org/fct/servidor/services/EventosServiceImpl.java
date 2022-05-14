@@ -3,117 +3,165 @@ package org.fct.servidor.services;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import org.fct.servidor.model.Eventos;
 import org.fct.servidor.repository.EventosRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
-public class EventosServiceImpl implements EventosService{
-	
+public class EventosServiceImpl implements EventosService {
+
 	@Autowired
 	EventosRepository eventosRepo;
 
 	public List<Eventos> getAllEventos() {
-		
+
 		List<Eventos> eventosList = eventosRepo.findAll();
-		
-		if(eventosList!=null && eventosList.size()>0) {
+
+		if (eventosList != null && eventosList.size() > 0) {
 			return eventosList;
 		}
-		
+
 		return new ArrayList<Eventos>();
 	}
 
 	public Eventos findEventosById(Long id) {
-		
-		if(id!=null) {
+
+		if (id != null) {
 			return eventosRepo.getById(id);
-		}else {
+		} else {
 			return null;
 		}
 	}
 
-
-	public Eventos getEventoByFecha(Date fecha) {
-		
-		if(fecha!=null) {
-			Eventos evento = eventosRepo.findByFecha(fecha);
-			return evento;
-		}else {
-			return null;
-		}
+	@Override
+	public List<Eventos> getEventoByFecha(String fecha) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-
 
 	public Eventos getEventoByTitulo(String titulo) {
-		
-		if(titulo!=null) {
+
+		if (titulo != null) {
 			Eventos evento = eventosRepo.findByTitulo(titulo);
 			return evento;
-		}else {
+		} else {
 			return null;
 		}
 	}
 
 	public List<Eventos> getEventosByTipo(String tipo) {
-		if(tipo!=null) {
+		if (tipo != null) {
 			List<Eventos> evento = (List<Eventos>) eventosRepo.findByTipo(tipo);
 			return evento;
-		}else {
+		} else {
 			return null;
 		}
 	}
 
 	public List<Eventos> getEventosByLugar(String lugar) {
 
-		if(lugar!=null) {
+		if (lugar != null) {
 			List<Eventos> evento = (List<Eventos>) eventosRepo.findByLugar(lugar);
 			return evento;
-		}else {
-			return null;
-		}
-	}
-
-	public List<Eventos> getEventosByFecha(Date fecha) {
-		
-		if(fecha!=null) {
-			List<Eventos>  eventos = (List<Eventos>) eventosRepo.findByFecha(fecha);
-			return eventos;
-		}else {
+		} else {
 			return null;
 		}
 	}
 
 	@Override
-	public List<Eventos> getEventosByHora(String hora) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Eventos> getEventosByTipoAndLugarAndFecha(String tipo, String lugar, String fecha) {
+		System.out.println(fecha);
+		List<Eventos> listaEventos = null;
 
-	@Override
-	public List<Eventos> getEventosByCoste(Double coste) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		if (StringUtils.hasLength(tipo) && StringUtils.hasLength(lugar) && StringUtils.hasLength(fecha)) {
+			listaEventos = eventosRepo.findDistinctByTipoAndLugarAndFecha(tipo, lugar, fecha);
+		} else if (StringUtils.hasLength(tipo) && StringUtils.hasLength(lugar) ) {
+			listaEventos = eventosRepo.findDistinctByTipoAndLugar(tipo, lugar);
 
-	@Override
-	public List<Eventos> getEventosByTipoAndLugar(String tipo, String lugar) {
-		
-		if(tipo!= null && lugar !=null) {
-			return eventosRepo.findDistinctByTipoAndLugar(tipo, lugar);
-		} else if(tipo!=null ){
-			return eventosRepo.findByTipo(tipo);
-		}else if(lugar!=null) {
-			return eventosRepo.findByLugar(lugar);
-		}
-		else {
+		} else if (StringUtils.hasLength(lugar) && StringUtils.hasLength(fecha)) {
+			listaEventos = eventosRepo.findDistinctByLugarAndFecha(lugar, fecha);
+
+		} else if (StringUtils.hasLength(tipo) && StringUtils.hasLength(fecha)) {
+			listaEventos = eventosRepo.findDistinctByTipoAndFecha(tipo, fecha);
+		} else if (StringUtils.hasLength(tipo)) {
+			listaEventos = eventosRepo.findByTipo(tipo);
+		} else if (StringUtils.hasLength(lugar) ) {
+			listaEventos = eventosRepo.findByLugar(lugar);
+		} else if (StringUtils.hasLength(fecha)) {
+			listaEventos = eventosRepo.findByFecha(fecha);
+		} else {
 			return eventosRepo.findAll();
 		}
-		
+
+		return listaEventos;
 	}
 
-	
+	@Override
+	public List<Eventos> getAllEventosByTipo() {
+
+		List<Eventos> eventosList = eventosRepo.findAll();
+		List<Eventos> eventosByTipo = new ArrayList();
+
+		if (eventosList != null && eventosList.size() > 0) {
+
+			for (int i = 0; i < eventosList.size(); i++) {
+
+				boolean encontrado = false;
+
+				for (int j = 0; j < eventosByTipo.size(); j++) {
+					encontrado = false;
+
+					if (eventosByTipo.get(j).getTipo().equals(eventosList.get(i).getTipo())) {
+						encontrado = true;
+						break;
+					}
+				}
+
+				if (!encontrado) {
+					eventosByTipo.add(eventosList.get(i));
+				}
+
+			}
+
+			return eventosByTipo;
+		} else {
+			return eventosList;
+		}
+	}
+
+	@Override
+	public List<Eventos> getAllEventosByLugar() {
+		List<Eventos> eventosList = eventosRepo.findAll();
+		List<Eventos> eventosByLugar = new ArrayList();
+
+		if (eventosList != null && eventosList.size() > 0) {
+
+			for (int i = 0; i < eventosList.size(); i++) {
+
+				boolean encontrado = false;
+
+				for (int j = 0; j < eventosByLugar.size(); j++) {
+					encontrado = false;
+
+					if (eventosByLugar.get(j).getLugar().equals(eventosList.get(i).getLugar())) {
+						encontrado = true;
+						break;
+					}
+				}
+
+				if (!encontrado) {
+					eventosByLugar.add(eventosList.get(i));
+				}
+			}
+
+			return eventosByLugar;
+		} else {
+			return eventosList;
+		}
+	}
 
 }

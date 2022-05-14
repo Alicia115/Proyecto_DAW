@@ -13,22 +13,24 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
-
 @Entity
-@Table(name="role")
-public class Role implements Serializable{
-	
+@Table(name = "role")
+public class Role implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id_role;
-	
-	@Column(unique=true, nullable=false)
+
+	@Column(unique = true, nullable = false)
 	private String role_name;
-	
-	@OneToMany(mappedBy="role", cascade = CascadeType.ALL,
-			orphanRemoval = true)
-	private Set<Usuario> usuarios = new HashSet<Usuario>();
+
+	/*
+	 * @OneToMany(mappedBy="role", cascade = CascadeType.ALL, orphanRemoval = true)
+	 * private Set<Usuario> usuarios = new HashSet<Usuario>();
+	 */
+
+	@OneToMany(mappedBy = "role", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<UsuarioRole> usuarioRole = new HashSet<>();
 
 	public Role() {
 		// TODO Auto-generated constructor stub
@@ -49,17 +51,20 @@ public class Role implements Serializable{
 	public void setRole_name(String role_name) {
 		this.role_name = role_name;
 	}
+	/*
+	 * public Set<Usuario> getUsuarios() { return usuarios; }
+	 * 
+	 * public void setUsuarios(Set<Usuario> usuarios) { this.usuarios = usuarios; }
+	 */
 
-	public Set<Usuario> getUsuarios() {
-		return usuarios;
+	public Set<UsuarioRole> getUsuarioRole() {
+		return usuarioRole;
 	}
 
-	public void setUsuarios(Set<Usuario> usuarios) {
-		this.usuarios = usuarios;
+	public void setUsuarioRole(Set<UsuarioRole> usuarioRole) {
+		this.usuarioRole = usuarioRole;
 	}
-	
-	
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -88,21 +93,19 @@ public class Role implements Serializable{
 		return true;
 	}
 
-	//Métodos HELPERs	
-	public void addUsuario(Usuario usuario)  {
-		this.usuarios.add(usuario);
-		usuario.setRole(this);
-	}
-	
-	public void removeUsuario(Usuario usuario) {
-		this.usuarios.remove(usuario);
-		usuario.setRole(null);
-	}
-
 	@Override
 	public String toString() {
-		return "Role [id_role=" + id_role + ", role_name=" + role_name + ", usuarios=" + usuarios + "]";
+		return "Role [id_role=" + id_role + ", role_name=" + role_name + ", usuarioRole=" + usuarioRole + "]";
 	}
+
+	/*
+	 * 
+	 * //Métodos HELPERs public void addUsuario(Usuario usuario) {
+	 * this.usuarios.add(usuario); usuario.setRole(this); }
+	 * 
+	 * public void removeUsuario(Usuario usuario) { this.usuarios.remove(usuario);
+	 * usuario.setRole(null); }
+	 */
 	
 	
 

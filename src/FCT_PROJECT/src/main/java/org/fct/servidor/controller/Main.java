@@ -1,6 +1,8 @@
 package org.fct.servidor.controller;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.fct.servidor.dto.EventosDTO;
 import org.fct.servidor.dto.UsuarioDTO;
@@ -8,6 +10,7 @@ import org.fct.servidor.dto.UsuarioLoginDTO;
 import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Role;
 import org.fct.servidor.model.Usuario;
+import org.fct.servidor.model.UsuarioRole;
 import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,10 @@ public class Main {
 		
 		EventosDTO eventdto = new EventosDTO();
 		List<Eventos> eventos = eventosService.getAllEventos();
+		List<Eventos> eventoslista = eventosService.getAllEventosByTipo();
+		List<Eventos> eventoslistalugar = eventosService.getAllEventosByLugar();
+		model.addAttribute("eventoslistalugar",eventoslistalugar);
+		model.addAttribute("eventoslista",eventoslista);
 		model.addAttribute("eventos",eventos);
 		model.addAttribute("eventdto",eventdto);
 		model.addAttribute("error",error);
@@ -45,26 +52,16 @@ public class Main {
 	public String postHome(@ModelAttribute EventosDTO eventdto,Model model) {
 		
 		String tipo = eventdto.getTipo();
+		String fecha = eventdto.getFecha();
 		String lugar = eventdto.getLugar();
+		System.out.println(lugar);
+		System.out.println(tipo);
+		System.out.println(fecha);
 			
-		return "redirect:/eventos/listaEventos?tipo="+tipo+"&lugar="+lugar;	
+		return "redirect:/eventos/listaEventos?tipo="+tipo+"&lugar="+lugar+"&fecha="+fecha;	
 
 	} 
 	
-	@GetMapping("/eventos/listaEventos")
-	public String eventosListado(@RequestParam(required = false, name = "tipo") String tipo, @RequestParam(required = false, name = "lugar") String lugar,
-			@RequestParam(required=false,name="error") String error, Model model) {
-
-		List<Eventos> eventosFiltro = eventosService.getEventosByTipoAndLugar(tipo, lugar);
-		/**
-		Eventos eventoTipo = eventosService.getEventoByTipo(eventdto.getTipo());
-		Eventos eventoLugar = eventosService.getEventoByLugar(eventdto.getLugar());
-		Eventos eventoFecha = eventosService.getEventoByFecha(eventdto.getFecha());*/
-		
-		model.addAttribute("eventosFiltro",eventosFiltro);
-		model.addAttribute("error",error);
-		return "eventosLista";
-	}
 	
 
 	@GetMapping("/login")
@@ -97,10 +94,6 @@ public class Main {
 	@PostMapping("/register")
 	public String registerPost(@ModelAttribute UsuarioDTO usuario) {
 		
-		Role role = new Role();
-		role.setId_role(2);
-		role.setRole_name("ROLE_USER");
-
 		Usuario userBD = new Usuario();
 		userBD.setActivo(true);
 		userBD.setNombre(usuario.getNombre());
@@ -108,8 +101,6 @@ public class Main {
 		userBD.setUsername(usuario.getUsername());
 		userBD.setEmail(usuario.getEmail());
 		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
-		userBD.setRole(role);
-
 		userBD = usuarioService.insertUsuario(userBD);
 
 		if (userBD == null) {

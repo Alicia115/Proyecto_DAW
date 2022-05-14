@@ -8,14 +8,13 @@
 
 	<div class="container">
 		<div class="row">
-			<!--
-			<form method="POST" action="#" th:action="@{/eventos/listaEventos}" th:object="${eventdtolistado}">
+			<form method="POST" action="#" th:action="@{/eventos/listaEventos}" th:object="${eventodto}">
 				<div class="row">
 
 					<div class="col" style="margin-top:2rem;">
 						<div class="form-group mb-2">
 							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
-							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
+							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo?</label>
 							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
 								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
 								margin-bottom:4rem; width:50%; border-radius:inherit;">
@@ -23,40 +22,52 @@
 					</div>
 					<div class="col" style="margin-top:2rem;">
 						<div class="form-group mb-2">
-							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
-							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
-							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
-								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-								margin-bottom:4rem; width:50%; border-radius:inherit;">
+							<i class="bi bi-forward-fill" style="color: #27D9C7;"></i>
+							<label for="event" class="form-label" style="color:#105952;"> ¿Qué hacer?</label>
+							<select name="event" th:field="*{tipo}" class="form-select form-select-sm"
+								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+							 margin-bottom:4rem; width:60%; border-radius:inherit;">
+								<option value=null selected>Todos los Eventos</option>
+								<option th:each="event : ${eventoslistatipo}" th:value="${event.tipo}"
+									th:text="${event.tipo}">
+								</option>
+							</select>
 						</div>
 					</div>
 					<div class="col" style="margin-top:2rem;">
 						<div class="form-group mb-2">
-							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
-							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
-							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
-								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-								margin-bottom:4rem; width:50%; border-radius:inherit;">
+							<i class="bi bi-geo-alt-fill" style="color: #27D9C7;"></i>
+							<label for="sitio" class="form-label" style="color:#105952;"> ¿Dónde?</label>
+							<select name="sitio" th:field="*{lugar}" class="form-select form-select-sm"
+								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+							 margin-bottom:4rem; width:55%; border-radius:inherit;">
+								<option value=null selected>Cualquier sitio</option>
+								<option th:each="e : ${eventoslistalugar}" th:value="${e.lugar}" th:text="${e.lugar}">
+								</option>
+							</select>
 						</div>
 					</div>
-
+					<!--
 					<div class="col" style="margin-top:2rem;">
 						<div class="form-group mb-2">
-							<i class="bi bi-calendar3" style="color: #27D9C7;"></i>
-							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo quiere ir?</label>
-							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
-								class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-								margin-bottom:4rem; width:50%; border-radius:inherit;">
+							<i class="bi bi-currency-euro" style="color: #27D9C7;"></i>
+							<label for="sitio" class="form-label" style="color:#105952;"> ¿Cuánto?</label>
+							<select name="sitio" th:field="*{coste}" class="form-select form-select-sm"
+								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+							 margin-bottom:4rem; width:50%; border-radius:inherit;">
+								<option th:each="e : ${eventoslista}" th:value="${e.coste}" th:text="${e.coste}">
+								</option>
+							</select>
 						</div>
-					</div>
+					</div> -->
 				</div>
-			</form>-->
+			</form>
 		</div>
 
 		<div class="row row-cols-1 row-cols-md-3 g-4">
 			<div class="card h-100" style="width: 18rem; margin:2rem;" th:each="event : ${eventosFiltro}">
 				<div class="card-body" style="color:#22BFB0;">
-					<h5 class="card-title" th:text="${event.titulo}" ></h5>
+					<h5 class="card-title" th:text="${event.titulo}"></h5>
 					<h6 class="card-subtitle mb-2 " th:text="${event.tipo}" style="opacity: 80%;"></h6>
 					<p class="card-text" th:text="${event.lugar}"></p>
 					<p class="card-text" th:text="${event.coste}"></p>

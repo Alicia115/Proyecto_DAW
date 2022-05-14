@@ -1,17 +1,20 @@
 package org.fct.servidor.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.springframework.core.annotation.Order;
 
 @Entity
 @Table(name="usuario")
@@ -39,9 +42,12 @@ public class Usuario implements Serializable {
 	@Column(nullable=false,columnDefinition="BOOLEAN")	
 	private boolean activo;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name = "id_role")
-	private Role role;
+	private Role role;*/
+	
+	@OneToMany(mappedBy="usuario",cascade=CascadeType.ALL,orphanRemoval = true)
+	private Set<UsuarioRole> usuarioRole = new HashSet<>();
 	
 	
 	public Usuario() {
@@ -117,8 +123,10 @@ public class Usuario implements Serializable {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
+	
+	
 
-
+/*
 	public Role getRole() {
 		return role;
 	}
@@ -126,18 +134,22 @@ public class Usuario implements Serializable {
 
 	public void setRole(Role role) {
 		this.role = role;
+	}*/
+
+
+	public List<UsuarioRole> getUsuarioRole() {
+		return new ArrayList<>(usuarioRole);
+	}
+
+
+	public void setUsuarioRole(Set<UsuarioRole> usuarioRole) {
+		this.usuarioRole = usuarioRole;
 	}
 
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + id_usuario;
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((username == null) ? 0 : username.hashCode());
-		return result;
+		return Objects.hash(activo, apellidos, email, id_usuario, nombre, password, username, usuarioRole);
 	}
 
 
@@ -150,32 +162,18 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (email == null) {
-			if (other.email != null)
-				return false;
-		} else if (!email.equals(other.email))
-			return false;
-		if (id_usuario != other.id_usuario)
-			return false;
-		if (role == null) {
-			if (other.role != null)
-				return false;
-		} else if (!role.equals(other.role))
-			return false;
-		if (username == null) {
-			if (other.username != null)
-				return false;
-		} else if (!username.equals(other.username))
-			return false;
-		return true;
+		return activo == other.activo && Objects.equals(apellidos, other.apellidos)
+				&& Objects.equals(email, other.email) && id_usuario == other.id_usuario
+				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
+				&& Objects.equals(username, other.username) && Objects.equals(usuarioRole, other.usuarioRole);
 	}
 
 
 	@Override
 	public String toString() {
 		return "Usuario [id_usuario=" + id_usuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", username=" + username + ", password=" + password + ", activo=" + activo + ", role=" + role
-				+ "]";
+				+ email + ", username=" + username + ", password=" + password + ", activo=" + activo + ", usuarioRole="
+				+ usuarioRole + "]";
 	}
 	
 	

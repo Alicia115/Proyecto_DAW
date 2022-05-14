@@ -5,10 +5,9 @@ import java.util.Date;
 
 public class EventosDTO implements Serializable{
 	
-	private Date fecha;
+	private String fecha;
 	private String lugar;
 	private String tipo;
-	private Double coste;
 
 	
 	public EventosDTO() {
@@ -16,14 +15,16 @@ public class EventosDTO implements Serializable{
 	}
 
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
 
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
+
+
 
 
 	public String getLugar() {
@@ -45,15 +46,6 @@ public class EventosDTO implements Serializable{
 		this.tipo = tipo;
 	}
 
-
-	public Double getCoste() {
-		return coste;
-	}
-
-
-	public void setCoste(Double coste) {
-		this.coste = coste;
-	}
 
 
 }

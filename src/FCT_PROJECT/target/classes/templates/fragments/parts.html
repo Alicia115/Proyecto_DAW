@@ -22,6 +22,9 @@
 							<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
 						</li>
 					</ul>
+					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
+						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Perfil</a>
+					</div >
 					<div style="margin-left: 4rem;">
 						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Iniciar Sesión</a>
 					</div >

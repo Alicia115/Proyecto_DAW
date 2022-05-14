@@ -3,6 +3,7 @@ package org.fct.servidor.services;
 import java.util.Optional;
 
 import org.fct.servidor.model.JPAUserDetails;
+import org.fct.servidor.model.Role;
 import org.fct.servidor.model.Usuario;
 import org.fct.servidor.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
