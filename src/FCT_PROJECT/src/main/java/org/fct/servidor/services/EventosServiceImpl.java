@@ -37,12 +37,6 @@ public class EventosServiceImpl implements EventosService {
 		}
 	}
 
-	@Override
-	public List<Eventos> getEventoByFecha(String fecha) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public Eventos getEventoByTitulo(String titulo) {
 
 		if (titulo != null) {
@@ -79,7 +73,7 @@ public class EventosServiceImpl implements EventosService {
 
 		if (StringUtils.hasLength(tipo) && StringUtils.hasLength(lugar) && StringUtils.hasLength(fecha)) {
 			listaEventos = eventosRepo.findDistinctByTipoAndLugarAndFecha(tipo, lugar, fecha);
-		} else if (StringUtils.hasLength(tipo) && StringUtils.hasLength(lugar) ) {
+		} else if (StringUtils.hasLength(tipo) && StringUtils.hasLength(lugar)) {
 			listaEventos = eventosRepo.findDistinctByTipoAndLugar(tipo, lugar);
 
 		} else if (StringUtils.hasLength(lugar) && StringUtils.hasLength(fecha)) {
@@ -89,7 +83,7 @@ public class EventosServiceImpl implements EventosService {
 			listaEventos = eventosRepo.findDistinctByTipoAndFecha(tipo, fecha);
 		} else if (StringUtils.hasLength(tipo)) {
 			listaEventos = eventosRepo.findByTipo(tipo);
-		} else if (StringUtils.hasLength(lugar) ) {
+		} else if (StringUtils.hasLength(lugar)) {
 			listaEventos = eventosRepo.findByLugar(lugar);
 		} else if (StringUtils.hasLength(fecha)) {
 			listaEventos = eventosRepo.findByFecha(fecha);
@@ -162,6 +156,27 @@ public class EventosServiceImpl implements EventosService {
 		} else {
 			return eventosList;
 		}
+	}
+
+	@Override
+	public Eventos insertarEvento(Eventos evento) {
+
+		if (evento != null) {
+			Eventos eventonuevo = eventosRepo.save(evento);
+			return eventonuevo;
+		}
+
+		return null;
+	}
+
+	@Override
+	public Eventos actualizarEvento(Eventos evento) {
+
+		if (evento == null || evento.getId_evento() == null) {
+			return null;
+		}
+
+		return eventosRepo.save(evento);
 	}
 
 }

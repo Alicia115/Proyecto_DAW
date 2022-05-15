@@ -8,6 +8,12 @@
 						style="width: 80px; margin:0.3rem; margin-left:3rem;">
 				</div>
 				<div class="collapse navbar-collapse d-flex col-4" id="navbarScroll" style="justify-content: end;">
+					<div style="margin-left: 4rem;" >
+						<a class="nav-link text-white" href="/" style="margin-right: 3rem;">Inicio</a>
+					</div>
+					<div style="margin-left: 4rem;" >
+						<a class="nav-link text-white" href="/eventos/addEventos" style="margin-right: 3rem;">Añadir Evento</a>
+					</div>
 					<ul class="navbar-nav" style="--bs-scroll-height: 100px;">
 						<li class="nav-item">
 							<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
@@ -24,10 +30,10 @@
 					</ul>
 					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
 						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Perfil</a>
-					</div >
+					</div>
 					<div style="margin-left: 4rem;">
 						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Iniciar Sesión</a>
-					</div >
+					</div>
 				</div>
 			</div>
 		</nav>

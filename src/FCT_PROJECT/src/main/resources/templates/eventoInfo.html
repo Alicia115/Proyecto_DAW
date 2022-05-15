@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='menu.home')"></head>
+
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+
+	<div class="container">
+		<div class="row justify-content-around" style="margin-top:2rem;">
+			<div class="col-4">
+				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid" th:alt="${event.imagen}">
+			</div>
+			<div class="col-4" style="color: #22BFB0; align-self: center;">
+				<h2 th:text="${event.titulo}" style="margin-left: 2rem;"></h2>
+				<h5 th:text="${event.tipo}" style="margin-left: 2.5rem;"></h5>
+				<h6 th:text="${event.lugar}" style="margin-left: 2.5rem;"></h6>
+			</div>
+			<div class="col-4" style="color: #22BFB0; align-self: center;">
+				<h4 th:text="${event.fecha}" style="margin-bottom: 2.5rem;"></h4>
+				<h6 th:text="${event.coste}"></h6>
+			</div>
+		</div>
+		<div class="row justify-content-around" style="margin-top:2rem;">
+			<div class="col-6 col-md-4">
+				<p th:text="${event.descripcion}"> </p>
+			</div>
+			<div class="col-12 col-md-8" style="margin-top:4rem;">
+				<div class="row" style="margin-bottom:2rem; margin-left:3rem;">
+					<div class="col-6 col-md-4">
+							<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Me Interesa</a>
+					</div>
+					<div class="col-6 col-md-4">
+							<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none;">Apuntar Calendario</a>
+					</div>
+					<div class="col-6 col-md-4">
+						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Guardar</a>
+					</div>
+
+				</div>
+				<div class="row" style="margin-left:3rem; margin-bottom:2rem;">
+					<div class="col-6 col-md-4">
+						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Volver</a>
+					</div>
+					<div class="col-6 col-md-4">
+						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none;">Eventos Guardados</a>
+					</div>
+					<div class="col-6 col-md-4">
+						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
+						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Eliminar</a>
+					</div>
+				</div>
+				
+				<div class="row" style="margin-left:3rem;">
+					<div class="col-6 col-md-4">
+					</div>
+					<div class="col-6 col-md-4">
+						<a class="text-center col-2 btn btn-primary" th:href="@{'/eventos/editEvento?evento='+${event.getId_evento()}}" style="background-color: #27D9C7; 
+						color:white; border-radius: 20px; width: 50%; height: 100%; border:none; margin-top:1rem; padding-top: 1.2rem;">Editar Evento</a>
+					</div>
+					<div class="col-6 col-md-4">
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="fragments/parts::footer"></footer>
+
+</body>
+
+</html>

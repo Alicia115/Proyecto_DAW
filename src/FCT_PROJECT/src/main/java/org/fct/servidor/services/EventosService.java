@@ -17,12 +17,13 @@ public interface EventosService {
 
 	public List<Eventos> getEventosByLugar(String lugar);
 
-	public List<Eventos> getEventoByFecha(String fecha);
-
 	public List<Eventos> getEventosByTipoAndLugarAndFecha(String tipo, String lugar, String fecha);
 	
 	public List<Eventos> getAllEventosByTipo();
 	
 	public List<Eventos> getAllEventosByLugar();
-
+	
+	public Eventos insertarEvento(Eventos evento);
+	
+	public Eventos actualizarEvento(Eventos evento);
 }

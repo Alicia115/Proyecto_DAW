@@ -33,6 +33,8 @@ public class EventoController {
 		List<Eventos> eventoslistatipo = eventosService.getAllEventosByTipo();
 		List<Eventos> eventoslistalugar = eventosService.getAllEventosByLugar();
 		
+		System.out.println(fecha);
+		
 		EventosDTO eventodto = new EventosDTO();
 	
 		/**
@@ -48,7 +50,26 @@ public class EventoController {
 		return "eventosLista";
 	}
 
+	@PostMapping("/eventos/listaEventos")
+	public String postEventosListado(@ModelAttribute EventosDTO eventodto,Model model) {
+		
+		String tipo = eventodto.getTipo();
+		String fecha = eventodto.getFecha();
+		String lugar = eventodto.getLugar();
+			
+		return "redirect:/eventos/listaEventos?tipo="+tipo+"&lugar="+lugar+"&fecha="+fecha;	
+
+	} 
 	
+	@GetMapping("/eventos/infoEvento")
+	public String eventosInfoGet(@RequestParam(required = false, name = "evento") String evento,
+			@RequestParam(required=false,name="error") String error, Model model) {
+		
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		model.addAttribute("event",event);
+		model.addAttribute("error",error);
+		return "eventoInfo";
+	}
 	
 	
 }

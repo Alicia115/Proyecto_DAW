@@ -38,6 +38,9 @@ public class Eventos implements Serializable{
 	
 	@Column(nullable=false)
 	private Double coste;
+	
+	@Column()
+	private String imagen;
 
 	public Eventos() {
 		
@@ -117,6 +120,20 @@ public class Eventos implements Serializable{
 	public void setCoste(Double coste) {
 		this.coste = coste;
 	}
+	
+	 
+
+	public String getImagen() {
+		return imagen;
+	}
+
+
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
+	}
+
+
 
 	@Override
 	public int hashCode() {
