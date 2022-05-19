@@ -39,7 +39,7 @@ Esta aplicación pretende cubrir las necesidades socioculturales del usuario, d�
 
 El prototipado de la Interfaz del Proyecto se ha realizado en la aplicación de Figma, siendo el siguiente:
 
-![alt prototipo_figma]([http://url/to/img.png](https://www.figma.com/proto/KIATyiO7gQoT6oiGhIiaNx/PROYECTO_FCT?node-id=17%3A130&scaling=min-zoom&page-id=0%3A1&starting-point-node-id=17%3A130))
+![alt prototipo_figma](https://github.com/Alicia115/Proyecto_DAW/blob/main/docs/Dise%C3%B1o/prototipo/figma.png)
 
 .... .... ....
 Estructura del Proyecto
