@@ -37,7 +37,9 @@ Esta aplicación pretende cubrir las necesidades socioculturales del usuario, d�
 
 ## Prototipo de la Interfaz del Proyecto
 
-En este apartado el alumno insertará la documentación del prototipo del proyecto (sketch, wireframe, mockup y un prototipo HTML y CSS) que permite al cliente previsualizar el resultado final del producto que se está desarrollando.
+El prototipado de la Interfaz del Proyecto se ha realizado en la aplicación de Figma, siendo el siguiente:
+
+![alt prototipo_figma](http://url/to/img.png)
 
 .... .... ....
 Estructura del Proyecto
