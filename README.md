@@ -46,10 +46,21 @@ El prototipado de la Interfaz del Proyecto se ha realizado en la aplicación de 
 -**Prototipado Final**
 ![alt prototipo_final](https://github.com/Alicia115/Proyecto_DAW/blob/main/docs/Dise%C3%B1o/prototipo/aplicacion.png)
 
-.... .... ....
-Estructura del Proyecto
 
-En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo.
+## Estructura del Proyecto
+
+El repositorio de este proyecto dispone de:
+
+- **docs/ :** Directorio dónde se almacena toda documentación del proyecto.
+  - Arquitectura/ : Información sobre la arquitectura de la aplicación.
+  - Diseño/: Documentación del diseño de la aplicación.
+  - Documentación: Documentos finales de entrega de la aplicación.
+- **src/ :** Directorio dónde se almacena el desarrollo de la aplicación.
+  
+  
+
+
+
 Demostración del proyecto
 
 Vídeo demostrativo que contenga una pequeña demostración de la apariencia del proyecto y de aquello que el proyecto puede hacer. (No más de 2 minutos).
