@@ -7,4 +7,6 @@ public interface UsuarioService {
 
 	public Usuario insertUsuario(Usuario usuario);
 	public Usuario loginUsuario(UsuarioLoginDTO usuario);
+	public Usuario getUsuarioByUserName(String username);
+	public Usuario actualizarUsuario(Usuario usuario);
 }

@@ -47,14 +47,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		/* URL con información sobre ANT MATCHERS
 		 * https://www.baeldung.com/spring-security-expressions */
 		http.csrf().disable().authorizeRequests()
-		.antMatchers("/", "/eventos/listaEventos", "/eventos/addEventos", "/eventos/infoEvento", "/eventos/editEvento").permitAll()
-		.antMatchers("/register/", "/login/").not().authenticated()
+		.antMatchers("/", "/eventos/listaEventos", "/eventos/infoEvento").permitAll()
 		.antMatchers("/asignaturas/*","/profesores/*", "/grados/*").authenticated()
-		.antMatchers("/departments/*").hasRole("ADMIN")
-		.antMatchers("/about","/alumnos/*","/services").hasRole("USER")
-		
+		.antMatchers("/eventos/addEventos", "/eventos/editEvento").hasRole("ADMIN")
+		.antMatchers("/user/perfil","/about","/services").hasRole("USER")
+		.antMatchers("/register", "/login").not().authenticated()
 		.and()
-		.formLogin().disable();		
+		.formLogin().loginPage("/login")
+		.loginProcessingUrl("/login");	
 	}
 	
 	/*

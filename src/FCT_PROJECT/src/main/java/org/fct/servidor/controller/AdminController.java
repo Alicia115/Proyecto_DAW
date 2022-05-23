@@ -89,15 +89,7 @@ public class AdminController {
 	public String editEventoPost(@ModelAttribute Eventos evento, 
 			@RequestParam(required = false, name = "file") MultipartFile imagen) {
 		
-		Eventos eventoActualizado = new Eventos();
-		eventoActualizado.setId_evento(evento.getId_evento());
-		eventoActualizado.setTitulo(evento.getTitulo());
-		eventoActualizado.setDescripcion(evento.getDescripcion());
-		eventoActualizado.setTipo(evento.getTipo());
-		eventoActualizado.setLugar(evento.getLugar());
-		eventoActualizado.setFecha(evento.getFecha());
-		eventoActualizado.setCoste(evento.getCoste());
-
+	
 		if (!imagen.isEmpty()) {
 			Path directorioImagenes = Paths.get("src//main//resources//static/img");
 			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
@@ -109,7 +101,7 @@ public class AdminController {
 				// Path rutaCompleta = Paths.get(ruta + "//" + imagen.getOriginalFilename());
 				Files.write(rutaCompleta, bytesImg);
 
-				eventoActualizado.setImagen(imagen.getOriginalFilename());
+				evento.setImagen(imagen.getOriginalFilename());
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -117,7 +109,7 @@ public class AdminController {
 			}
 		}
 
-		if (eventosService.actualizarEvento(eventoActualizado) == null) {
+		if (eventosService.actualizarEvento(evento) == null) {
 			return "redirect:/eventos/editEvento?error=error&evento" + evento.getId_evento();
 		}
 		return "redirect:/eventos/listaEventos";

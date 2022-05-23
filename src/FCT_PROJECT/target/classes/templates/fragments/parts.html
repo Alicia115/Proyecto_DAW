@@ -1,20 +1,31 @@
 <meta charset="UTF-8">
 <header th:fragment="menu">
-	<div style="background-color: #27D9C7;">
-		<nav class="navbar navbar-expand-lg">
+	<div class="fixed-top" style="background-color: #27D9C7;">
+		<nav class="navbar navbar-expand-lg ">
 			<div class="container-fluid row justify-content-between">
 				<div class="navbar-brand col-4">
 					<img src="/img/logo.png" class="rounded float-start" alt="logo"
 						style="width: 80px; margin:0.3rem; margin-left:3rem;">
 				</div>
 				<div class="collapse navbar-collapse d-flex col-4" id="navbarScroll" style="justify-content: end;">
-					<div style="margin-left: 4rem;" >
+					<div style="margin-left: 4rem;">
 						<a class="nav-link text-white" href="/" style="margin-right: 3rem;">Inicio</a>
 					</div>
-					<div style="margin-left: 4rem;" >
-						<a class="nav-link text-white" href="/eventos/addEventos" style="margin-right: 3rem;">Añadir Evento</a>
+					<div style="margin-left: 4rem;">
+						<a class="nav-link text-white" href="/eventos/listaEventos" style="margin-right: 3rem;">Buscar
+							Eventos</a>
 					</div>
-					<ul class="navbar-nav" style="--bs-scroll-height: 100px;">
+					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
+						<a class="nav-link text-white" href="/" style="margin-right: 3rem;">Guardados</a>
+					</div>
+					<div style="margin-left: 4rem;">
+						<a class="nav-link text-white" href="/eventos/addEventos" style="margin-right: 3rem;"
+							sec:authorize="hasRole('ROLE_ADMIN')">Añadir Evento</a>
+					</div>
+					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
+						<a class="nav-link text-white" href="/user/perfil" style="margin-right: 3rem;">Perfil</a>
+					</div>
+					<ul class="navbar-nav" style="--bs-scroll-height: 100px;" sec:authorize="!isAuthenticated()">
 						<li class="nav-item">
 							<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
 						</li>
@@ -28,10 +39,11 @@
 							<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
 						</li>
 					</ul>
-					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
-						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Perfil</a>
+					<div style="margin-left: 4rem;" sec:authorize="isAuthenticated()">
+						<a class="nav-link text-white" href="/logout" style="margin-right: 3rem;">Logout</a>
 					</div>
-					<div style="margin-left: 4rem;">
+
+					<div style="margin-left: 4rem;" sec:authorize="!isAuthenticated()">
 						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Iniciar Sesión</a>
 					</div>
 				</div>
@@ -44,6 +56,7 @@
 
 <footer class="text-center text-white fixed-bottom">
 	<div>
+		
 		<div class="row" style="background-color: #27D9C7;">
 			<div class="col">
 				<img src="/img/logo.png" class="rounded float-start" alt="logo"
@@ -58,6 +71,22 @@
 			<div class="col" style="align-self: center;">
 				<a class="text-white" href="#!" style="text-decoration:none;">Términos y Condiciones</a>
 			</div>
+			<nav class="col navbar navbar-expand-lg " style="align-self: center;">
+				<ul class="navbar-nav" style="--bs-scroll-height: 100px;" sec:authorize="isAuthenticated()">
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#"><i class="bi bi-facebook"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#"><i class="bi bi-twitter"></i></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
+						</li>
+					</ul>
+			</nav>
 			<div class="col text-white" style="align-self: center;"> © 2022 Copyright</div>
 		</div>
 	</div>

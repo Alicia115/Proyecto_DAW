@@ -22,7 +22,7 @@ public class Usuario implements Serializable {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id_usuario;
+	private Long id_usuario;
 	
 	@Column(nullable=false)
 	private String nombre;
@@ -39,30 +39,36 @@ public class Usuario implements Serializable {
 	@Column(nullable=false)
 	private String password;
 	
+	@Column(nullable=false)
+	private String id_role;
+	
 	@Column(nullable=false,columnDefinition="BOOLEAN")	
 	private boolean activo;
 	
 	/*@ManyToOne
 	@JoinColumn(name = "id_role")
-	private Role role;*/
+	private Role role;
 	
 	@OneToMany(mappedBy="usuario",cascade=CascadeType.ALL,orphanRemoval = true)
 	private Set<UsuarioRole> usuarioRole = new HashSet<>();
 	
-	
+	*/
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 
 
-	public int getId_usuario() {
+
+	public Long getId_usuario() {
 		return id_usuario;
 	}
 
 
-	public void setId_usuario(int id_usuario) {
+
+	public void setId_usuario(Long id_usuario) {
 		this.id_usuario = id_usuario;
 	}
+
 
 
 	public String getNombre() {
@@ -125,31 +131,19 @@ public class Usuario implements Serializable {
 	}
 	
 	
-
-/*
-	public Role getRole() {
-		return role;
+	public String getId_role() {
+		return id_role;
 	}
 
 
-	public void setRole(Role role) {
-		this.role = role;
-	}*/
-
-
-	public List<UsuarioRole> getUsuarioRole() {
-		return new ArrayList<>(usuarioRole);
-	}
-
-
-	public void setUsuarioRole(Set<UsuarioRole> usuarioRole) {
-		this.usuarioRole = usuarioRole;
+	public void setId_role(String id_role) {
+		this.id_role = id_role;
 	}
 
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(activo, apellidos, email, id_usuario, nombre, password, username, usuarioRole);
+		return Objects.hash(activo, apellidos, email, id_role, id_usuario, nombre, password, username);
 	}
 
 
@@ -163,18 +157,39 @@ public class Usuario implements Serializable {
 			return false;
 		Usuario other = (Usuario) obj;
 		return activo == other.activo && Objects.equals(apellidos, other.apellidos)
-				&& Objects.equals(email, other.email) && id_usuario == other.id_usuario
-				&& Objects.equals(nombre, other.nombre) && Objects.equals(password, other.password)
-				&& Objects.equals(username, other.username) && Objects.equals(usuarioRole, other.usuarioRole);
+				&& Objects.equals(email, other.email) && Objects.equals(id_role, other.id_role)
+				&& id_usuario == other.id_usuario && Objects.equals(nombre, other.nombre)
+				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
 	}
 
 
 	@Override
 	public String toString() {
 		return "Usuario [id_usuario=" + id_usuario + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", username=" + username + ", password=" + password + ", activo=" + activo + ", usuarioRole="
-				+ usuarioRole + "]";
+				+ email + ", username=" + username + ", password=" + password + ", id_role=" + id_role + ", activo="
+				+ activo + "]";
 	}
+
+/*
+	public Role getRole() {
+		return role;
+	}
+
+
+	public void setRole(Role role) {
+		this.role = role;
+	
+	public List<UsuarioRole> getUsuarioRole() {
+		return new ArrayList<>(usuarioRole);
+	}
+
+	public void setUsuarioRole(Set<UsuarioRole> usuarioRole) {
+		this.usuarioRole = usuarioRole;
+	}
+}*/
+
+
+
 	
 	
 

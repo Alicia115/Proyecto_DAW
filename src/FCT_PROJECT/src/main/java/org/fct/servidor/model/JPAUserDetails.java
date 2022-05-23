@@ -20,8 +20,10 @@ public class JPAUserDetails implements UserDetails {
 		this.usuario = usuario.getUsername();
 		this.password = usuario.getPassword();
 		this.activo = usuario.isActivo();
-		this.authorities = new ArrayList<GrantedAuthority>();
-		this.authorities.add(new SimpleGrantedAuthority(usuario.getUsuarioRole().get(0).getRole().getRole_name()));
+		this.authorities = new ArrayList<>();				
+		this.authorities.add(new SimpleGrantedAuthority(usuario.getId_role()));
+		//this.authorities = new ArrayList<GrantedAuthority>();
+		//this.authorities.add(new SimpleGrantedAuthority(usuario.getUsuarioRole().get(0).getRole().getRole_name()));
 
 	}
 

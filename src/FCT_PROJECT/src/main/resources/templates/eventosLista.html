@@ -6,10 +6,10 @@
 <body>
 	<header th:insert="fragments/parts::menu"></header>
 
-	<div class="container">
-		<div class="row">
+	<div class="" style="margin:10rem;">
+		<div class="row justify-content-md-center" style="margin-left:10rem;">
 			<form method="POST" action="#" th:action="@{/eventos/listaEventos}" th:object="${eventodto}">
-				<div class="row">
+				<div class="row justify-content-md-center">
 
 					<div class="col" style="margin-top:2rem;">
 						<div class="form-group mb-2">
@@ -17,7 +17,7 @@
 							<label for="fecha" class="form-label" style="color:#105952;"> ¿Cuándo?</label>
 							<input id="fecha" type="date" name="username" placeholder="¿Cuándo quiere ir?"
 								th:field="*{fecha}" class="datepicker form-control" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-								margin-bottom:4rem; width:50%; border-radius:inherit;">
+								margin-bottom:4rem; width:60%; border-radius:inherit;">
 						</div>
 					</div>
 					<div class="col" style="margin-top:2rem;">
@@ -26,7 +26,7 @@
 							<label for="event" class="form-label" style="color:#105952;"> ¿Qué hacer?</label>
 							<select name="event" th:field="*{tipo}" class="form-select form-select-sm"
 								aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-							 margin-bottom:4rem; width:60%; border-radius:inherit;">
+							 margin-bottom:4rem; width:70%; border-radius:inherit;">
 								<option value="" selected>Todos los Eventos</option>
 								<option th:each="event : ${eventoslistatipo}" th:value="${event.tipo}"
 									th:text="${event.tipo}">
@@ -71,7 +71,7 @@
 			</form>
 		</div>
 
-		<div class="row row-cols-1 row-cols-md-3 g-4">
+		<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
 			<div class="card h-100" style="width: 18rem; margin:2rem; border:none;" th:each="event : ${eventosFiltro}">
 				<a th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}" style="text-decoration:none;">
 					<div style="max-width:100%; max-height:50%;"> 

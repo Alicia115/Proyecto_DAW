@@ -24,7 +24,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	public Usuario insertUsuario(Usuario usuario) {
 		
-		if (usuario!=null) {
+		if (usuario!=null && userRepo.findByUsername(usuario.getUsername())==null) {
 			
 			return userRepo.save(usuario);
 		}
@@ -43,6 +43,27 @@ public class UsuarioServiceImpl implements UsuarioService{
 		}
 		
 		return null;
+	}
+
+	@Override
+	public Usuario getUsuarioByUserName(String username) {
+		
+		if(username!=null) {
+			Usuario user =  userRepo.findByUsername(username).get();
+			return user;
+		}
+		
+		return null;
+	}
+
+	@Override
+	public Usuario actualizarUsuario(Usuario usuario) {
+		
+		if (usuario == null || usuario.getUsername()==null ) {
+			return null;
+		}
+
+		return userRepo.save(usuario);
 	}
 
 }

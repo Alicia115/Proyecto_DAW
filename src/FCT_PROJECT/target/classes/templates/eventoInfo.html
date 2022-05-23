@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<head th:replace="fragments/bootstrap::head(title='menu.home')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.home')">
+</head>
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
 
-	<div class="container">
+	<div class="container" style="margin-top:10rem; margin-bottom:10rem;">
 		<div class="row justify-content-around" style="margin-top:2rem;">
 			<div class="col-4">
-				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid" th:alt="${event.imagen}">
+				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid" th:alt="${event.imagen}" style="width:80%;">
 			</div>
 			<div class="col-4" style="color: #22BFB0; align-self: center;">
 				<h2 th:text="${event.titulo}" style="margin-left: 2rem;"></h2>
@@ -44,13 +45,13 @@
 				<div class="row" style="margin-left:3rem; margin-bottom:2rem;">
 					<div class="col-6 col-md-4">
 						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
-						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Volver</a>
+						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem; padding-bottom:1rem;">Volver</a>
 					</div>
-					<div class="col-6 col-md-4">
+					<div class="col-6 col-md-4" sec:authorize="isAuthenticated()" >
 						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
 						border-radius: 20px; width: 50%; height: 100%; border:none;">Eventos Guardados</a>
 					</div>
-					<div class="col-6 col-md-4">
+					<div class="col-6 col-md-4" sec:authorize="isAuthenticated()" >
 						<a class="text-center col-2 btn btn-primary" th:href="@{/eventos/listaEventos}" style="background-color: #27D9C7; color:white; 
 						border-radius: 20px; width: 50%; height: 100%; border:none; padding-top: 1.2rem;">Eliminar</a>
 					</div>
@@ -59,7 +60,7 @@
 				<div class="row" style="margin-left:3rem;">
 					<div class="col-6 col-md-4">
 					</div>
-					<div class="col-6 col-md-4">
+					<div class="col-6 col-md-4" sec:authorize="hasRole('ROLE_ADMIN')" >
 						<a class="text-center col-2 btn btn-primary" th:href="@{'/eventos/editEvento?evento='+${event.getId_evento()}}" style="background-color: #27D9C7; 
 						color:white; border-radius: 20px; width: 50%; height: 100%; border:none; margin-top:1rem; padding-top: 1.2rem;">Editar Evento</a>
 					</div>
