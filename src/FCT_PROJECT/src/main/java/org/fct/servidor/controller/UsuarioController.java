@@ -87,26 +87,24 @@ public class UsuarioController {
 	}
 
 	private ErrorObject setearPassword(UsuarioModificarDTO usuario, String username) {
-
+		Usuario user = userService.getUsuarioByUserName(username);
 		Usuario nuevo_usuario = userService.getUsuarioByUserName(username);
 		nuevo_usuario.setNombre(usuario.getNombre());
 		nuevo_usuario.setApellidos(usuario.getApellidos());
 		nuevo_usuario.setEmail(usuario.getEmail());
 		nuevo_usuario.setUsername(usuario.getUsername());
+		nuevo_usuario.setPassword(user.getPassword());
 
 		ErrorObject object = new ErrorObject();
 
-		if (!"".equals(usuario.getNewpassword()) && !"".equals(usuario.getConfirmpassword())) {
+		if (!"".equals(usuario.getNewpassword()) && !"".equals(usuario.getConfirmpassword()) && !"".equals(usuario.getPassword())) {
 
 			if (comprobarPassword(usuario.getPassword(), usuario.getNewpassword(), usuario.getConfirmpassword(),
 					username)) {
 				nuevo_usuario.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getNewpassword()));
 			}
 			object.setError("error.errorPassword");
-
-		} else {
-			nuevo_usuario.setPassword(usuario.getPassword());
-		}
+		} 
 
 		object.setObject(nuevo_usuario);
 		return object;

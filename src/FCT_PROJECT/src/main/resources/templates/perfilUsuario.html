@@ -37,7 +37,7 @@
 								<input id="username" type="text" name="username" placeholder="Nombre de Usuario"
 									th:field="*{username}"
 									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:3rem;"
-									required>
+									disabled>
 							</div>
 						</div>
 					</div>
@@ -50,18 +50,18 @@
 								<input id="password" type="password" name="password" placeholder="Antigua Contraseña"
 									th:field="*{password}"
 									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-									required>
+									>
 							</div>
 							<div class="form-group">
 								<i class="bi bi-lock-fill" style="color: #27D9C7;"></i>
-								<input id="password" type="password" name="password" placeholder="Nueva Contraseña"
+								<input id="newpassword" type="password" name="newpassword" placeholder="Nueva Contraseña"
 									th:field="*{newpassword}"
 									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
 									>
 							</div>
 							<div class="form-group">
 								<i class="bi bi-lock-fill" style="color: #27D9C7;"></i>
-								<input id="password" type="password" name="password" placeholder="Confirmar Contraseña"
+								<input id="confirmpassword" type="password" name="confirmpassword" placeholder="Confirmar Contraseña"
 									th:field="*{confirmpassword}"
 									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:1rem;"
 									>

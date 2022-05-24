@@ -1,9 +1,7 @@
 package org.fct.servidor.services;
 
-import java.util.Optional;
 
 import org.fct.servidor.model.JPAUserDetails;
-import org.fct.servidor.model.Role;
 import org.fct.servidor.model.Usuario;
 import org.fct.servidor.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,10 +16,11 @@ public class JPAUserDetailsService implements UserDetailsService {
 	@Autowired
 	UsuarioRepository usuarioRepository;
 	
+	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		
 		//Obtengo el usuario
-		Optional<Usuario> user = usuarioRepository.findByUsername(username);
+		Usuario user = usuarioRepository.findByUsername(username);
 		
 		
 		//Si el usuario no existe debo devolver una excepción
@@ -30,7 +29,7 @@ public class JPAUserDetailsService implements UserDetailsService {
 		}
 		
 		//Adapto la información del usuario al UserDetails que es lo que debe devolver el método
-		JPAUserDetails userDetails = new JPAUserDetails(user.get());
+		JPAUserDetails userDetails = new JPAUserDetails(user);
 		return userDetails;
 		
 	}

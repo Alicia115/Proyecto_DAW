@@ -8,9 +8,7 @@ import org.fct.servidor.dto.EventosDTO;
 import org.fct.servidor.dto.UsuarioDTO;
 import org.fct.servidor.dto.UsuarioLoginDTO;
 import org.fct.servidor.model.Eventos;
-import org.fct.servidor.model.Role;
 import org.fct.servidor.model.Usuario;
-import org.fct.servidor.model.UsuarioRole;
 import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +76,7 @@ public class Main {
 			
 		if(usuarioService.loginUsuario(usuario)!=null) {
 			System.out.println(usuario.getUsername());
-			return "redirect:/?user="+usuario.getUsername();
+			return "redirect:/";
 		}
 		
 		return "redirect:/login";
@@ -102,6 +100,7 @@ public class Main {
 		userBD.setApellidos(usuario.getApellidos());
 		userBD.setUsername(usuario.getUsername());
 		userBD.setEmail(usuario.getEmail());
+		userBD.setId_role("ROLE_USER");
 		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
 		System.out.println(userBD);
 		if (usuarioService.insertUsuario(userBD) == null) {

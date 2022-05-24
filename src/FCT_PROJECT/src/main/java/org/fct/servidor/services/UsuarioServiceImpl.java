@@ -34,11 +34,11 @@ public class UsuarioServiceImpl implements UsuarioService{
 
 	public Usuario loginUsuario(UsuarioLoginDTO usuario) {
 		
-		Optional<Usuario> user = userRepo.findByUsername(usuario.getUsername());
+		Usuario user = userRepo.findByUsername(usuario.getUsername());
 		
-		if(user.isPresent() && encriptador.matches(usuario.getPassword(), user.get().getPassword())) {
+		if(user!=null && encriptador.matches(usuario.getPassword(), user.getPassword())) {
 			
-			return user.get();
+			return user;
 			
 		}
 		
@@ -49,7 +49,7 @@ public class UsuarioServiceImpl implements UsuarioService{
 	public Usuario getUsuarioByUserName(String username) {
 		
 		if(username!=null) {
-			Usuario user =  userRepo.findByUsername(username).get();
+			Usuario user =  userRepo.findByUsername(username);
 			return user;
 		}
 		
