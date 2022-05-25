@@ -23,6 +23,7 @@
 								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
 								required>
 						</div>
+						<h6 class="text-danger" th:if="${error!=null}" th:text="#{'error.login'}"></h6>
 						<button class="waves-effect waves-light btn " type="submit"
 							style="background-color: #27D9C7; color:white; border-radius: 20px;">INICIAR SESIÓN</button>
 						<div class="text" style="margin-top:2rem;">

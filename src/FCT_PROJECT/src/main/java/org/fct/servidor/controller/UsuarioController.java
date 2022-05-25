@@ -54,25 +54,58 @@ public class UsuarioController {
 
 		String error = null;
 		String username = auth.getName();
-		ErrorObject objeto = setearPassword(usuario, username);
-		Usuario nuevo_usuario = null;
+		String newPassword = new BCryptPasswordEncoder(15).encode(usuario.getNewpassword());
+		Usuario user = userService.getUsuarioByUserName(username);
+		Usuario nuevo_usuario = userService.getUsuarioByUserName(username);
+		nuevo_usuario.setNombre(usuario.getNombre());
+		nuevo_usuario.setApellidos(usuario.getApellidos());
+		nuevo_usuario.setEmail(usuario.getEmail());
+		nuevo_usuario.setUsername(usuario.getUsername());
+		nuevo_usuario.setPassword(user.getPassword());
 
+		if (!"".equals(usuario.getNewpassword()) && !"".equals(usuario.getPassword())) {
+
+			if (comprobarPassword(usuario.getPassword(), newPassword, username)) {
+				nuevo_usuario.setPassword(newPassword);
+			}else {
+				return "redirect:/user/perfil?error=error";
+			}
+		} 
+		
+		userService.actualizarUsuario(nuevo_usuario);
+		
+		return "redirect:/user/perfil";
+		
+		
+		/*ErrorObject objeto = setearPassword(usuario, username);
+		Usuario nuevo_usuario = null;
+		System.out.println(objeto);
 		if (objeto.getError() == null) {
 			nuevo_usuario = (Usuario) objeto.getObject();
+			System.out.println(nuevo_usuario);
+			userService.actualizarUsuario(nuevo_usuario);
+			return "redirect:/user/perfil";
 		} else {
 			error = objeto.getError();
 			return "redirect:/user/perfil?error=" + error;
-		}
-		System.out.println(nuevo_usuario);
-
-		System.out.println(nuevo_usuario);
-		if (userService.actualizarUsuario(nuevo_usuario) == null) {
-			error = "error.errorUsername";
-			return "redirect:/user/perfil?error=" + error;
-		}
-
-		return "redirect:/user/perfil";
+		}	*/
+		
+		
 	}
+	
+	private boolean comprobarPassword(String antigua, String nueva, String username) {
+
+		if (!antigua.equals(nueva)) {
+			Usuario usuario = userService.getUsuarioByUserName(username);
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder(15);
+			if (encoder.matches(antigua, usuario.getPassword())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	/*
 
 	private boolean comprobarPassword(String antigua, String nueva, String confirmar, String username) {
 
@@ -108,5 +141,5 @@ public class UsuarioController {
 
 		object.setObject(nuevo_usuario);
 		return object;
-	}
+	}*/
 }

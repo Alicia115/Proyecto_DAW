@@ -59,10 +59,6 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario actualizarUsuario(Usuario usuario) {
 		
-		if (usuario == null || usuario.getUsername()==null ) {
-			return null;
-		}
-
 		return userRepo.save(usuario);
 	}
 

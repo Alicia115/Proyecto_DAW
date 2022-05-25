@@ -63,15 +63,15 @@ public class Main {
 	
 
 	@GetMapping("/login")
-	public String loginGet(Model model) {
+	public String loginGet(@RequestParam(required = false, name = "error") String error,Model model) {
 
 		model.addAttribute("usuario", new UsuarioLoginDTO() );
+		model.addAttribute("error", error);
 		return "loginUser";
 	}
 
 	@PostMapping("/login")
 	public String loginPost(@ModelAttribute UsuarioLoginDTO usuario, Model model) {	
-		
 		System.out.println("no se ha iniciado");
 			
 		if(usuarioService.loginUsuario(usuario)!=null) {
@@ -79,21 +79,22 @@ public class Main {
 			return "redirect:/";
 		}
 		
-		return "redirect:/login";
+		return "redirect:/login?error=error";
 
 	}
 
 	@GetMapping("/register")
-	public String registerGet(Model model) {
+	public String registerGet(@RequestParam(required = false, name = "error") String error,Model model) {
 
 		UsuarioDTO userDTO = new UsuarioDTO();
 		model.addAttribute("usuario", userDTO);
+		model.addAttribute("error", error);
 		return "register";
 	}
 
 	@PostMapping("/register")
 	public String registerPost(@ModelAttribute UsuarioDTO usuario) {
-		String error = "error.register";
+		
 		Usuario userBD = new Usuario();
 		userBD.setActivo(true);
 		userBD.setNombre(usuario.getNombre());
@@ -104,7 +105,7 @@ public class Main {
 		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
 		System.out.println(userBD);
 		if (usuarioService.insertUsuario(userBD) == null) {
-			return "redirect:/register?error=" + error;
+			return "redirect:/register?error=error";
 		}
 
 		return "redirect:/";
