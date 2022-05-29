@@ -1,14 +1,22 @@
 package org.fct.servidor.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name="eventos")
@@ -41,11 +49,21 @@ public class Eventos implements Serializable{
 	
 	@Column()
 	private String imagen;
+	
+	@OneToMany(mappedBy="eventos",cascade=CascadeType.ALL,orphanRemoval = true)
+	private Set<Comentarios> comentariose = new HashSet<>();
+	
+	
+	@OneToMany(mappedBy="eventValor",cascade=CascadeType.ALL,orphanRemoval = true)
+	private Set<Valoracion> valoracione = new HashSet<>();
+	
+	@OneToMany(mappedBy="eventGuarEv",cascade=CascadeType.ALL,orphanRemoval = true)
+	private Set<GuardarEvento> guardarEventoe = new HashSet<>();
+	
 
 	public Eventos() {
 		
 	}
-
 	
 
 	public Long getId_evento() {
@@ -134,18 +152,43 @@ public class Eventos implements Serializable{
 	}
 
 
+	public Set<Comentarios> getComentariose() {
+		return comentariose;
+	}
+
+
+
+	public void setComentariose(Set<Comentarios> comentariose) {
+		this.comentariose = comentariose;
+	}
+
+
+
+	public Set<Valoracion> getValoracione() {
+		return valoracione;
+	}
+
+
+
+	public void setValoracione(Set<Valoracion> valoracione) {
+		this.valoracione = valoracione;
+	}
+
+
+	public Set<GuardarEvento> getGuardarEventoe() {
+		return guardarEventoe;
+	}
+
+
+	public void setGuardarEventoe(Set<GuardarEvento> guardarEventoe) {
+		this.guardarEventoe = guardarEventoe;
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((fecha == null) ? 0 : fecha.hashCode());
-		result = prime * result + ((id_evento == null) ? 0 : id_evento.hashCode());
-		result = prime * result + ((lugar == null) ? 0 : lugar.hashCode());
-		result = prime * result + ((tipo == null) ? 0 : tipo.hashCode());
-		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		return result;
+		return Objects.hash(id_evento);
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -156,33 +199,9 @@ public class Eventos implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Eventos other = (Eventos) obj;
-		if (fecha == null) {
-			if (other.fecha != null)
-				return false;
-		} else if (!fecha.equals(other.fecha))
-			return false;
-		if (id_evento == null) {
-			if (other.id_evento != null)
-				return false;
-		} else if (!id_evento.equals(other.id_evento))
-			return false;
-		if (lugar == null) {
-			if (other.lugar != null)
-				return false;
-		} else if (!lugar.equals(other.lugar))
-			return false;
-		if (tipo == null) {
-			if (other.tipo != null)
-				return false;
-		} else if (!tipo.equals(other.tipo))
-			return false;
-		if (titulo == null) {
-			if (other.titulo != null)
-				return false;
-		} else if (!titulo.equals(other.titulo))
-			return false;
-		return true;
+		return Objects.equals(id_evento, other.id_evento);
 	}
+
 
 	@Override
 	public String toString() {
@@ -192,7 +211,73 @@ public class Eventos implements Serializable{
 	
 	
 	
-	
+	//Métodos Helpers
+		public void addComment(Usuario usuario, String titulo, String descripcion,LocalDate fecha) {
+			Comentarios comentario = new Comentarios(usuario,this, titulo, descripcion, fecha);
+			boolean encontrado=false;
+			for (Comentarios comentarios : comentariose) {
+				if(comentarios.getUsuario().getId_usuario() == comentario.getUsuario().getId_usuario() && 
+						comentarios.getEvento().getId_evento()== comentario.getEvento().getId_evento()) {
+					comentarios.setTitulo(titulo);
+					comentarios.setDescripcion(descripcion);
+					encontrado = true;
+					break;
+				}
+			}
+			if(!encontrado) {
+				this.comentariose.add(comentario);
+				usuario.getComentariosu().add(comentario);
+			}
+		}
+		
+		public void removeComment(Usuario usuario) {
+			Comentarios comentario  = new Comentarios(usuario,this);
+			usuario.getComentariosu().remove(comentario);
+			this.comentariose.remove(comentario);		
+		}
+		
+		public void addValoracion(Usuario usuario, String fecha, int puntuacion) {
+			Valoracion valoracion = new Valoracion(usuario,this, fecha, puntuacion);
+			this.valoracione.add(valoracion);
+			usuario.getValoracionu().add(valoracion);
+		}
+		
+		public void removeValoracion(Usuario usuario) {
+			Valoracion valoracion  = new Valoracion(usuario,this);
+			usuario.getComentariosu().remove(valoracion);
+			this.valoracione.remove(valoracion);		
+		}
+		
+		public void addGuardarEvento(Usuario usuario) {
+			GuardarEvento guardaEvento = new GuardarEvento(usuario, this);
+			boolean encontrado = false;
+			for (GuardarEvento eventos : guardarEventoe) {
+				if (eventos.getUserGuarEv().getId_usuario() == guardaEvento.getUserGuarEv().getId_usuario()
+						&& eventos.getEventGuarEv().getId_evento() == guardaEvento.getEventGuarEv().getId_evento()) {
+					encontrado = true;
+					break;
+				}
+			}
+			if (!encontrado) {
+				this.guardarEventoe.add(guardaEvento);
+				usuario.getGuardarEventou().add(guardaEvento);
+			}
+		}
+		
+		public void removeGuardarEvento(Usuario usuario) {
+			GuardarEvento guardaEvento  = new GuardarEvento(usuario,this);
+			boolean encontrado = false;
+			for (GuardarEvento eventos : guardarEventoe) {
+				if (eventos.getUserGuarEv().getId_usuario() == guardaEvento.getUserGuarEv().getId_usuario()
+						&& eventos.getEventGuarEv().getId_evento() == guardaEvento.getEventGuarEv().getId_evento()) {
+					encontrado = true;
+					usuario.getGuardarEventou().remove(guardaEvento);
+					this.guardarEventoe.remove(guardaEvento);	
+					break;
+				}
+			}
+				
+		}
 	
 	
 

@@ -3,10 +3,13 @@ package org.fct.servidor.controller;
 import java.util.List;
 
 import org.fct.servidor.dto.EventosDTO;
+import org.fct.servidor.dto.UsuarioActualizarDTO;
 import org.fct.servidor.model.Eventos;
+import org.fct.servidor.model.Usuario;
 import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -71,5 +74,27 @@ public class EventoController {
 		return "eventoInfo";
 	}
 	
+	@GetMapping("/eventos/comentarios")
+	public String eventosComentarios(@RequestParam(required = false, name = "error") String error, Model model,
+			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
+
+		String username = auth.getName();
+		Usuario usuario = new Usuario();
+		usuario = usuarioService.getUsuarioByUserName(username);
+
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		
+		model.addAttribute("event",event);
+		model.addAttribute("error", error);
+		return "eventoComentarios";
+	}
+/*
+	@PostMapping("/eventos/comentarios")
+	public String userComentariosPost(@ModelAttribute UsuarioActualizarDTO usuario, Authentication auth) {
+
+		
+		
+		return "redirect:/user/comentarios";	
+	}*/
 	
 }

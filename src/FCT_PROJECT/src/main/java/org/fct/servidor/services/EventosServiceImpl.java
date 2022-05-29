@@ -172,7 +172,7 @@ public class EventosServiceImpl implements EventosService {
 	@Override
 	public Eventos actualizarEvento(Eventos evento) {
 
-		if (evento == null || evento.getId_evento() == null) {
+		if (evento == null && evento.getId_evento() == null) {
 			return null;
 		}
 

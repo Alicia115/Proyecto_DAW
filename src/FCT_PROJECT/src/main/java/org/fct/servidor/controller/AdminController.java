@@ -34,7 +34,7 @@ public class AdminController {
 		model.addAttribute("eventodto", eventodto);
 		model.addAttribute("error", error);
 		model.addAttribute("previo", nombre);
-		return "addEvento";
+		return "addEventoAdmin";
 	}
 
 	@PostMapping("/eventos/addEventos")
@@ -82,7 +82,7 @@ public class AdminController {
 		List<Eventos> eventoslistatipo = eventosService.getAllEventosByTipo();
 		model.addAttribute("eventoslistatipo", eventoslistatipo);
 		model.addAttribute("eventoedit", eventoedit);
-		return "editEvento";
+		return "editEventoAdmin";
 	}
 
 	@PostMapping("/eventos/editEvento")

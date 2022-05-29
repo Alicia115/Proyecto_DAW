@@ -1,38 +1,45 @@
 <!DOCTYPE html>
 <html>
 
-<head th:replace="fragments/bootstrap::head(title='menu.home')"></head>
+<head th:replace="fragments/bootstrap::head(title='menu.editEvent')"></head>
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
 
-	<section class="container"  style="margin-top:9rem; margin-bottom:8rem;">
+	<section class="container" style="margin-top:8rem; margin-bottom:8rem;">
 		<div class="row justify-content-md-center">
 			<article class="col-md-auto">
-				<h3 class="text-center" style="color: #27D9C7; margin-top:2.5rem;">AÑADIR EVENTO</h3>
-				<form method="POST" action="#" th:action="@{/eventos/addEventos}" th:object="${eventodto}"
+				<h3 class="text-center" style="color: #27D9C7; margin-top:2.5rem;">EDITAR EVENTO</h3>
+				<form method="POST" action="#" th:action="@{/eventos/editEvento}" th:object="${eventoedit}"
 					enctype="multipart/form-data">
 					<div class="row" style="margin-top:4rem;">
 						<div class="col">
 							<div class="form-group">
-								<i class="bi bi-person-fill" style="color: #27D9C7;"></i>
+								<i class="bi bi-fingerprint" style="color: #27D9C7;"></i>
+								<input id="id_evento" type="text" name="id_evento" placeholder="Titulo"
+									th:field="*{id_evento}"
+									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
+									readonly>
+							</div>
+							<div class="form-group">
+								<i class="bi bi-fonts" style="color: #27D9C7;"></i>
 								<input id="nombre" type="text" name="titulo" placeholder="Titulo" th:field="*{titulo}"
-									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:3rem;"
+									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
 									required>
 							</div>
 							<div class="form-group">
 								<i class="bi bi-geo-alt-fill" style="color: #27D9C7;"></i>
 								<input id="lugar" type="text" name="lugar" placeholder="Lugar" th:field="*{lugar}"
-									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:3rem;"
+									style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
 									required>
 							</div>
 							<div class="form-group">
 								<i class="bi bi-forward-fill" style="color: #27D9C7;"></i>
 								<label for="tipo" class="form-label" style="color:#105952; margin-left:0.2rem;">Tipo de
 									Evento</label>
-								<select name="tipo" th:field="*{tipo}" class="form-select form-select-sm"
-									aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-							 margin-bottom:3rem; width:60%; border-radius:inherit;  margin-left:1.4rem;">
+								<select name="tipo" th:field="*{tipo}" class="form-select form-select-sm" aria-label=".form-select-sm example" 
+								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem; 
+								width:60%; border-radius:inherit;  margin-left:1.4rem;">
 									<option th:each="event : ${eventoslistatipo}" th:value="${event.tipo}"
 										th:text="${event.tipo}">
 									</option>
@@ -70,9 +77,10 @@
 								margin-bottom:2rem; border-radius:inherit; margin-left:1.4rem;">
 							</div>
 						</div>
-						<div class="row justify-content-md-center"> 
-						<button class="waves-effect waves-light btn " type="submit"
-							style="background-color: #27D9C7; color:white; border-radius: 20px; width:20%; margin-top:3rem;">AÑADIR EVENTO</button>
+						<div class="row justify-content-md-center">
+							<button class="waves-effect waves-light btn " type="submit"
+								style="background-color: #27D9C7; color:white; border-radius: 20px; width:20%; margin-top:3rem;">ACTUALIZAR
+								EVENTO</button>
 						</div>
 					</div>
 				</form>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='menu.eventoGuardado')"></head>
+
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+
+	<div class="" style="margin:10rem;">
+		<h3 class="text-center" style="color: #27D9C7; margin-bottom:2rem;">MIS COMENTARIOS</h3>
+		
+			<div class="col-8" style="color: #22BFB0; align-self: center;">
+				<h3 th:text="#{comentarios}" style="text-align: center; margin-bottom:2rem;"> </h3>
+				<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
+					<div class="card" style="width: 18rem; margin:2rem; border-color: #27d9c7;"
+						th:each="e : ${eventos.comentariose}">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${e.titulo}"></h5>
+							<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
+							<p class="card-text" style="color: #105952; text-align: justify;"
+								th:text="${e.descripcion}"></p>
+							<a href="#" class="card-link" style="text-decoration: none; color: #22BFB0;" sec:authorize="hasRole('ROLE_ADMIN')">Editar
+								Comentario</a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+	</div>
+
+	<footer th:replace="fragments/parts::footer"></footer>
+
+</body>
+
+</html>

@@ -45,6 +45,15 @@ public class Usuario implements Serializable {
 	@Column(nullable=false,columnDefinition="BOOLEAN")	
 	private boolean activo;
 	
+	@OneToMany(mappedBy="userComen",cascade=CascadeType.MERGE,orphanRemoval = true)
+	private Set<Comentarios> comentariosu = new HashSet<>();
+	
+	@OneToMany(mappedBy="userValor",cascade=CascadeType.ALL,orphanRemoval = true)
+	private Set<Valoracion> valoracionu = new HashSet<>();
+	
+	@OneToMany(mappedBy="userGuarEv",cascade=CascadeType.MERGE,orphanRemoval = true)
+	private Set<GuardarEvento> guardarEventou = new HashSet<>();
+	
 	/*@ManyToOne
 	@JoinColumn(name = "id_role")
 	private Role role;
@@ -141,10 +150,44 @@ public class Usuario implements Serializable {
 	}
 
 
+	public Set<Comentarios> getComentariosu() {
+		return comentariosu;
+	}
+
+
+
+	public void setComentariosu(Set<Comentarios> comentariosu) {
+		this.comentariosu = comentariosu;
+	}
+
+
+	public Set<Valoracion> getValoracionu() {
+		return valoracionu;
+	}
+
+
+
+	public void setValoracionu(Set<Valoracion> valoracionu) {
+		this.valoracionu = valoracionu;
+	}
+
+
+	public Set<GuardarEvento> getGuardarEventou() {
+		return guardarEventou;
+	}
+
+
+
+	public void setGuardarEventou(Set<GuardarEvento> guardarEventou) {
+		this.guardarEventou = guardarEventou;
+	}
+
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(activo, apellidos, email, id_role, id_usuario, nombre, password, username);
+		return Objects.hash(id_usuario, username);
 	}
+
 
 
 	@Override
@@ -156,11 +199,9 @@ public class Usuario implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		return activo == other.activo && Objects.equals(apellidos, other.apellidos)
-				&& Objects.equals(email, other.email) && Objects.equals(id_role, other.id_role)
-				&& id_usuario == other.id_usuario && Objects.equals(nombre, other.nombre)
-				&& Objects.equals(password, other.password) && Objects.equals(username, other.username);
+		return Objects.equals(id_usuario, other.id_usuario) && Objects.equals(username, other.username);
 	}
+
 
 
 	@Override
