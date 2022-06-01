@@ -26,30 +26,32 @@
 			<div class="col-8" style="color: #22BFB0; align-self: center;">
 				<div class="row justify-content-md-center">
 					<article class="col-md-auto">
-						<h3 class="text-center" style="color: #27D9C7; ">AÑADIR COMENTARIO</h3>
-						<form method="POST" th:action="@{/user/comentarios}" enctype="multipart/form-data" th:object="${comentario}"> 
-							<div class="row" style="margin-top:4rem; border:1px #27D9C7" >
+						<h3 class="text-center" style="color: #27D9C7; ">AÑADIR VALORACION</h3>
+						<form method="POST" th:action="@{/user/valoraciones}" enctype="multipart/form-data"
+							th:object="${valoracion}">
+							<div class="row" style="margin-top:4rem; border:1px #27D9C7">
 								<div class="col">
 									<div class="form-group">
-										<i class="bi bi-fonts" style="color: #27D9C7;"></i>
-										<input id="titulo" type="text" name="titulo" placeholder="Titulo" th:field="*{titulo}"
-											style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:3rem;"
-											required>
+										<i class="bi bi-chat-square-heart-fill"></i>
+										
+										<select name="tipo" th:field="*{puntuacion}" class="form-select form-select-sm"
+											aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
+											margin-bottom:3rem; width:60%; border-radius:inherit;  margin-left:1.4rem;">
+											<option th:value="1">1</option>
+											<option th:value="2">2</option>
+											<option th:value="3">3</option>
+											<option th:value="4">4</option>
+											<option th:value="5">5</option>
+										</select>
 									</div>
-									<div class="form-group">
-										<i class="bi bi-card-text" style="color: #27D9C7;"></i>
-										<textarea class="form-control" id="descripcion" rows="4"
-											placeholder="Comentario del Evento"  th:field="*{descripcion}"
-											style="color:#105952; outline: none; border: 2px solid #105952; margin-bottom:2rem;  margin-left:1.4rem;"></textarea>
-									</div>
-									<input id="id_evento" type="hidden" name="id_evento"  th:field="*{id_evento}"
-											th:value="${comentario.id_evento}" required>
+									<input id="id_evento" type="hidden" name="id_evento" th:field="*{id_evento}"
+										th:value="${valoracion.id_evento}" required>
 								</div>
 
 								<div class="row justify-content-md-center">
 									<button class="waves-effect waves-light btn " type="submit"
 										style="background-color: #27D9C7; color:white; border-radius: 20px; width:auto; padding:1rem; margin:1.5rem;">
-										COMENTAR</button>
+										VALORAR</button>
 								</div>
 							</div>
 						</form>

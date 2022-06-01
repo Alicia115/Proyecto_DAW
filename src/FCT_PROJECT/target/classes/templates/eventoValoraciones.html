@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='menu.valoraciones')">
+</head>
+
+<body>
+	<header th:insert="fragments/parts::menu"></header>
+
+	<div class="container" style="margin-top:10rem; margin-bottom:10rem;">
+		<div class="row justify-content-around" style="margin-top:2rem;">
+			<div class="col-4 ">
+				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid " th:alt="${event.imagen}" style="width:80%;">
+				<div style="margin-top:2rem; color: #22BFB0; align-self: center;">
+					<h2 th:text="${event.titulo}" style="margin-left: 1rem;"></h2>
+					<h5 th:text="${event.tipo}" style="margin-left: 1.5rem;"></h5>
+					<h6 th:text="${event.lugar}" style="margin-left: 1.5rem;"></h6>
+					<div class="row justify-content-around" style="margin:2rem;">
+						<div class="col-2">
+							<div class="d-flex justify-content-center">
+								<a class="text-center col-2 btn btn-primary"
+									th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}"
+									style="background-color: #27D9C7; color:white; border-radius: 20px;border:none; width:auto; padding:1rem; margin:1.5rem;">Volver</a>
+							</div>
+						</div>
+						<div class="col-2">
+							<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
+								<a class="text-center col-2 btn btn-primary"
+									th:href="@{'/user/valoraciones?evento='+${event.getId_evento()}}"
+									style="background-color: #27D9C7; color:white; border-radius: 20px;border:none; width:auto; padding:1rem; margin:1.5rem;">Valorar</a>
+							</div>
+						</div>
+
+					</div>
+
+
+				</div>
+			</div>
+
+			<div class="col-8" style="color: #22BFB0; align-self: center;">
+				<h3 th:text="#{valoraciones}" style="text-align: center; margin-bottom:2rem;"> </h3>
+				<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
+					<div class="card" style="width: 18rem; margin:2rem; border-color: #27d9c7;"
+						th:each="e : ${event.valoracione}">
+						<div class="card-body">
+							<h5 class="card-title" th:text="${e.puntuacion}"></h5>
+							<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
+							<a href="#" class="card-link" style="text-decoration: none; color: #22BFB0;" sec:authorize="hasRole('ROLE_ADMIN')">Editar
+								Comentario</a>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="fragments/parts::footer"></footer>
+
+</body>
+
+</html>

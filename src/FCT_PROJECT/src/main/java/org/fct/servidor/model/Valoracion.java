@@ -1,9 +1,9 @@
 package org.fct.servidor.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -27,14 +27,14 @@ public class Valoracion implements Serializable{
 	private Eventos eventValor;
 	
 	
-	private String fecha;
+	private LocalDate fecha;
 	private int puntuacion;
 
 	public Valoracion() {
 		
 	}
 
-	public Valoracion(Usuario usuario, Eventos evento, String fecha, int puntuacion) {
+	public Valoracion(Usuario usuario, Eventos evento, LocalDate fecha, int puntuacion) {
 		super();
 		this.userValor = usuario;
 		this.eventValor = evento;
@@ -64,11 +64,11 @@ public class Valoracion implements Serializable{
 		this.eventValor = evento;
 	}
 
-	public String getFecha() {
+	public LocalDate getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(LocalDate fecha) {
 		this.fecha = fecha;
 	}
 

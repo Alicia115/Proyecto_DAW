@@ -76,6 +76,17 @@ public class EventoController {
 	
 	@GetMapping("/eventos/comentarios")
 	public String eventosComentarios(@RequestParam(required = false, name = "error") String error, Model model,
+			 @RequestParam(required = false, name = "evento") String evento) {
+
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		
+		model.addAttribute("event",event);
+		model.addAttribute("error", error);
+		return "eventoComentarios";
+	}
+
+	@GetMapping("/eventos/valoraciones")
+	public String eventosValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
 			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
 
 		String username = auth.getName();
@@ -86,15 +97,7 @@ public class EventoController {
 		
 		model.addAttribute("event",event);
 		model.addAttribute("error", error);
-		return "eventoComentarios";
+		return "eventoValoraciones";
 	}
-/*
-	@PostMapping("/eventos/comentarios")
-	public String userComentariosPost(@ModelAttribute UsuarioActualizarDTO usuario, Authentication auth) {
-
-		
-		
-		return "redirect:/user/comentarios";	
-	}*/
 	
 }

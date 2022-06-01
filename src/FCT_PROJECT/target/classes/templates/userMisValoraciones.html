@@ -7,20 +7,18 @@
 	<header th:insert="fragments/parts::menu"></header>
 
 	<div class="" style="margin:10rem;">
-		<h3 class="text-center" style="color: #27D9C7; margin-bottom:3rem;" th:text="#{title.usercomentarios}"> </h3>
+		<h3 class="text-center" style="color: #27D9C7; margin-bottom:3rem;" th:text="#{title.uservaloraciones}"></h3>
 
 		<div class="col-8" style="color: #22BFB0; align-self: center;">
 			<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
 				<div class="card" style="width: 18rem; margin:2rem; border-color: #27d9c7;" th:each="e : ${eventos}">
 					<div class="card-body">
-						<h5 class="card-title" th:text="${e.titulo}"></h5>
+						<h5 class="card-title" th:text="${e.puntuacion}"></h5>
 						<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
-						<p class="card-text" style="color: #105952; text-align: justify;" th:text="${e.descripcion}">
-						</p>
-						<a href="#" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}">
-							</a>
-						<a th:href="@{'/user/deletemiscomentarios?evento='+${e.getEvento().getId_evento()}}" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{borrar}">
-							</a>
+						<a href="@{'/user/valoraciones?evento='+${event.getId_evento()}}"
+							class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}"></a>
+						<a th:href="@{'/user/deletemisvaloraciones?evento='+${e.getEvento().getId_evento()}}"
+							class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{borrar}"></a>
 					</div>
 				</div>
 			</div>

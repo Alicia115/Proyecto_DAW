@@ -27,6 +27,13 @@
 			<div class="col-4" style="color: #22BFB0; align-self: center;">
 				<h4 th:text="${event.fecha}" style="margin-bottom: 2.5rem;"></h4>
 				<h6 th:text="${event.coste}"></h6>
+				<div style="vertical-align:middle; margin-left: 3rem;">
+					<a th:href="@{'/eventos/valoraciones?evento='+${event.getId_evento()}}"
+						style="text-decoration:none; color: #22BFB0; ">
+						<div style="float:left; margin-right: 0.5rem;"><i class="bi bi-chat-heart-fill"></i></div>
+						<p th:text="#{valoraciones}" style="margin-top:4rem;"></p>
+					</a>
+				</div>
 			</div>
 		</div>
 		<div class="row justify-content-around" style="margin-top:2rem;">

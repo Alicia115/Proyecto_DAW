@@ -1,15 +1,14 @@
 package org.fct.servidor.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.fct.servidor.dto.ComentarioDTO;
 import org.fct.servidor.dto.UsuarioActualizarDTO;
+import org.fct.servidor.dto.ValoracionDTO;
 import org.fct.servidor.model.Comentarios;
 import org.fct.servidor.model.Eventos;
-import org.fct.servidor.model.GuardarEvento;
 import org.fct.servidor.model.Usuario;
+import org.fct.servidor.model.Valoracion;
 import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,7 @@ public class UsuarioController {
 			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
 		
 		if (evento == null) {
-			return "redirect:/eventos/comentarios?evento="+evento;
+			return "redirect:/eventos/valoraciones?evento="+evento;
 		}
         
 		String username = auth.getName();
@@ -75,26 +74,69 @@ public class UsuarioController {
         eventosService.actualizarEvento(evento);
     		
     	return "redirect:/eventos/comentarios?evento="+comentario.getId_evento();
-        
 	}
+	
+
+	@GetMapping("/user/valoraciones")
+	public String userValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
+			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
+		
+		if (evento == null) {
+			return "redirect:/eventos/comentarios?evento="+evento;
+		}
+        
+		String username = auth.getName();
+		Usuario usuario = userService.getUsuarioByUserName(username);
+		ValoracionDTO valoraciondto = new ValoracionDTO();
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		
+		for (Valoracion valoracion : event.getValoracione()) {
+			if(valoracion.getUsuario().getId_usuario()==usuario.getId_usuario()) {
+				valoraciondto.setPuntuacion(valoracion.getPuntuacion());
+				break;
+			}
+		}
+		
+		valoraciondto.setId_evento(Long.toString(event.getId_evento(), 10));
+		model.addAttribute("valoracion",valoraciondto);
+		model.addAttribute("event",event);
+		model.addAttribute("error", error);
+		return "userAddValoracion";
+	}
+	
+	@PostMapping("/user/valoraciones")
+	public String userValoracionesPost( Model model,Authentication auth, 
+			@ModelAttribute ValoracionDTO valoracion) {
+
+		String username = auth.getName();
+		Usuario usuario = userService.getUsuarioByUserName(username);
+		Eventos evento = eventosService.findEventosById(Long.parseLong(valoracion.getId_evento()));
+		System.out.println(valoracion.getPuntuacion());
+		
+		/*Obtener fecha en String*/
+		LocalDate fecha =LocalDate.now();
+		evento.addValoracion(usuario, fecha, valoracion.getPuntuacion());
+        eventosService.actualizarEvento(evento);
+    		
+    	return "redirect:/eventos/valoraciones?evento="+valoracion.getId_evento();
+	}
+	
 	
 	@GetMapping("/user/guardados")
 	public String userComentariosGuardados(@RequestParam(required = false, name = "error") String error, Model model,
 			Authentication auth) {
 		
 		String username = auth.getName();
-		Usuario usuario = new Usuario();
-		usuario = userService.getUsuarioByUserName(username);
+		Usuario usuario = userService.getUsuarioByUserName(username);
 		
-		System.out.println(usuario.getGuardarEventou());
-		
+		/*
 		List<Eventos> eventos = new ArrayList<>();
 		
 		for (GuardarEvento evento : usuario.getGuardarEventou()) {
 			eventos.add(evento.getEventGuarEv());
-		}
+		}*/
 		
-		model.addAttribute("eventos", eventos);
+		model.addAttribute("eventos", usuario.getEventos_guardados());
 		
 		return "userEventosGuardados";
 	
@@ -105,8 +147,7 @@ public class UsuarioController {
 			@RequestParam(required = false, name = "evento") String evento, Authentication auth) {
 		
 		String username = auth.getName();
-		Usuario usuario = new Usuario();
-		usuario = userService.getUsuarioByUserName(username);
+		Usuario usuario = userService.getUsuarioByUserName(username);
 		
 		Eventos eventoSelect = eventosService.findEventosById(Long.parseLong(evento));
 		eventoSelect.addGuardarEvento(usuario);
@@ -121,11 +162,10 @@ public class UsuarioController {
 			@RequestParam(required = false, name = "evento") String evento, Authentication auth) {
 		
 		String username = auth.getName();
-		Usuario usuario = new Usuario();
-		usuario = userService.getUsuarioByUserName(username);
+		Usuario usuario = userService.getUsuarioByUserName(username);
 		
 		Eventos eventoSelect = eventosService.findEventosById(Long.parseLong(evento));
-		eventoSelect.removeComment(usuario);
+		eventoSelect.removeGuardarEvento(usuario);
 		eventosService.actualizarEvento(eventoSelect);
 		
 		return "redirect:/user/guardados";
@@ -138,31 +178,63 @@ public class UsuarioController {
 			Authentication auth) {
 		
 		String username = auth.getName();
-		Usuario usuario = new Usuario();
-		usuario = userService.getUsuarioByUserName(username);
+		Usuario usuario = userService.getUsuarioByUserName(username);
 		
-		List<Eventos> eventos = new ArrayList<>();
-		
-		for (Comentarios comentario : usuario.getComentariosu()) {
-			eventos.add(comentario.getEvento());
-		}
-		
-		
-		
-		model.addAttribute("eventos", eventos);
+		model.addAttribute("eventos", usuario.getComentariosu());
 		
 		return "userMisComentarios";
 
 	}
+	
+	@GetMapping("/user/deletemiscomentarios")
+	public String userDeleteMisComentarios(@RequestParam(required = false, name = "error") String error, Model model,
+			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
+		
+		String username = auth.getName();
+		Usuario usuario = userService.getUsuarioByUserName(username);
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		event.removeComment(usuario);
+		eventosService.actualizarEvento(event);
+		
+		return "redirect:/user/miscomentarios";
+
+	}
+	
+	@GetMapping("/user/misvaloraciones")
+	public String userMisValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
+			Authentication auth) {
+		
+		String username = auth.getName();
+		Usuario usuario = userService.getUsuarioByUserName(username);
+		
+		model.addAttribute("eventos", usuario.getValoracionu());
+		
+		return "userMisValoraciones";
+
+	}
+	
+	@GetMapping("/user/deletemisvaloraciones")
+	public String userDeleteMisValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
+			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
+		
+		String username = auth.getName();
+		Usuario usuario = userService.getUsuarioByUserName(username);
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		event.removeValoracion(usuario);
+		eventosService.actualizarEvento(event);
+		
+		return "redirect:/user/misvaloraciones";
+
+	}
+	
+	
 	
 	@GetMapping("/user/perfil")
 	public String userPerfil(@RequestParam(required = false, name = "error") String error, Model model,
 			Authentication auth) {
 
 		String username = auth.getName();
-		Usuario usuario = new Usuario();
-
-		usuario = userService.getUsuarioByUserName(username);
+		Usuario usuario = userService.getUsuarioByUserName(username);
 
 		UsuarioActualizarDTO usuariodto = new UsuarioActualizarDTO();
 		usuariodto.setNombre(usuario.getNombre());
