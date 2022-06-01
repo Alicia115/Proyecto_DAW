@@ -15,7 +15,7 @@
 					<div class="card-body">
 						<h5 class="card-title" th:text="${e.puntuacion}"></h5>
 						<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
-						<a href="@{'/user/valoraciones?evento='+${event.getId_evento()}}"
+						<a th:href="@{'/user/valoraciones?evento='+${e.getEvento().getId_evento()}}"
 							class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}"></a>
 						<a th:href="@{'/user/deletemisvaloraciones?evento='+${e.getEvento().getId_evento()}}"
 							class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{borrar}"></a>

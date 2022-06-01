@@ -62,4 +62,13 @@ public class UsuarioServiceImpl implements UsuarioService{
 		return userRepo.save(usuario);
 	}
 
+	@Override
+	public Usuario findUsuarioById(Long id) {
+		if (id != null) {
+			return userRepo.getById(id);
+		} else {
+			return null;
+		}
+	}
+
 }

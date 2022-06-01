@@ -17,7 +17,7 @@
 						<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
 						<p class="card-text" style="color: #105952; text-align: justify;" th:text="${e.descripcion}">
 						</p>
-						<a href="#" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}">
+						<a th:href="@{'/user/comentarios?evento='+${e.getEvento().getId_evento()}}" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}">
 							</a>
 						<a th:href="@{'/user/deletemiscomentarios?evento='+${e.getEvento().getId_evento()}}" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{borrar}">
 							</a>

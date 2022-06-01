@@ -8,8 +8,11 @@ import java.util.List;
 
 import org.fct.servidor.dto.EventoInfoDTO;
 import org.fct.servidor.model.Eventos;
+import org.fct.servidor.model.Usuario;
 import org.fct.servidor.services.EventosServiceImpl;
+import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +26,9 @@ public class AdminController {
 
 	@Autowired
 	EventosServiceImpl eventosService;
+	
+	@Autowired
+	UsuarioServiceImpl userService;
 
 	@GetMapping("/eventos/addEventos")
 	public String addEventoGet(@RequestParam(required = false, name = "error") String error,
@@ -114,5 +120,34 @@ public class AdminController {
 		}
 		return "redirect:/eventos/listaEventos";
 	}
+	
+	@GetMapping("/admin/deletecomentarios")
+	public String userDeleteComentarios(@RequestParam(required = false, name = "error") String error, Model model,
+			 @RequestParam(required = false, name = "evento") String evento, @RequestParam(required = false, name = "usuario") String usuario) {
+		
+		Usuario user = userService.findUsuarioById(Long.parseLong(usuario));
+		System.out.println(user);
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		System.out.println(event);
+		event.removeComment(user);
+		eventosService.actualizarEvento(event);
+		
+		return "redirect:/eventos/comentarios?evento="+evento;
+
+	}
+	
+	@GetMapping("/admin/deletevaloraciones")
+	public String userDeleteValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
+			 @RequestParam(required = false, name = "evento") String evento, @RequestParam(required = false, name = "usuario") String usuario) {
+		
+		Usuario user = userService.findUsuarioById(Long.parseLong(usuario));
+		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
+		event.removeValoracion(user);
+		eventosService.actualizarEvento(event);
+		
+		return "redirect:/eventos/valoraciones?evento="+evento;
+
+	}
+	
 
 }

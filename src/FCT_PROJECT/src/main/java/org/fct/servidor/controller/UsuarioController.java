@@ -227,8 +227,6 @@ public class UsuarioController {
 
 	}
 	
-	
-	
 	@GetMapping("/user/perfil")
 	public String userPerfil(@RequestParam(required = false, name = "error") String error, Model model,
 			Authentication auth) {

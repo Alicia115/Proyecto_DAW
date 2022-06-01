@@ -45,8 +45,9 @@
 						<div class="card-body">
 							<h5 class="card-title" th:text="${e.puntuacion}"></h5>
 							<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
-							<a href="#" class="card-link" style="text-decoration: none; color: #22BFB0;" sec:authorize="hasRole('ROLE_ADMIN')">Editar
-								Comentario</a>
+							<a th:href="@{|/admin/deletevaloraciones?evento=${e.getEvento().getId_evento()}&usuario=${e.getUsuario().getId_usuario()}}|"
+								class="card-link" style="text-decoration: none; color: #22BFB0;"
+								sec:authorize="hasRole('ROLE_ADMIN')">Borrar Valoracion</a>
 						</div>
 					</div>
 				</div>

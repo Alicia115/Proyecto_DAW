@@ -2,6 +2,7 @@ package org.fct.servidor.repository;
 
 import java.util.Optional;
 
+import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -10,4 +11,5 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepository extends JpaRepository<Usuario,Long> {
 
 	public Usuario findByUsername(String username);
+	public Optional<Usuario> findById(Long id_usuario);
 }

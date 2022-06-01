@@ -87,11 +87,7 @@ public class EventoController {
 
 	@GetMapping("/eventos/valoraciones")
 	public String eventosValoraciones(@RequestParam(required = false, name = "error") String error, Model model,
-			Authentication auth, @RequestParam(required = false, name = "evento") String evento) {
-
-		String username = auth.getName();
-		Usuario usuario = new Usuario();
-		usuario = usuarioService.getUsuarioByUserName(username);
+			@RequestParam(required = false, name = "evento") String evento) {
 
 		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
 		
