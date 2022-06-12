@@ -6,49 +6,50 @@
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
-
-	<div class="container" style="margin-top:10rem; margin-bottom:10rem;">
-		<div class="row justify-content-around" style="margin-top:2rem;">
-			<div class="col-4 ">
-				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid " th:alt="${event.imagen}" style="width:80%;">
-				<div style="margin-top:2rem; color: #22BFB0; align-self: center;">
-					<h2 th:text="${event.titulo}" style="margin-left: 1rem;"></h2>
-					<h5 th:text="${event.tipo}" style="margin-left: 1.5rem;"></h5>
-					<h6 th:text="${event.lugar}" style="margin-left: 1.5rem;"></h6>
-					<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
-						<a class="text-center col-2 btn btn-primary"
-							th:href="@{'/eventos/comentarios?evento='+${event.getId_evento()}}"
-							style="background-color: #27D9C7; color:white; border-radius: 20px;border:none; width:auto; padding:1rem; margin:1.5rem;">Volver</a>
+	<div class="container contenedor">
+		<div class="row justify-content-around">
+			<div class="col-sm-12 col-lg-4">
+				<div class="row justify-content-center">
+					<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}"
+						style="width:80%;">
+				</div>
+				<div class="row justify-content-center">
+					<div class="row justify-content-center color-card form-margen widh-80">
+						<h2 th:text="${event.titulo}"></h2>
+						<h5 th:text="${event.tipo}"></h5>
+						<h6 th:text="${event.lugar}"></h6>
+					</div>
+					<div class="row justify-content-around form-margen margin-bottom">
+						<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
+							<a class="text-center col-2 btn btn-primary boton-basic"
+								th:href="@{'/eventos/comentarios?evento='+${event.getId_evento()}}">Volver</a>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-8" style="color: #22BFB0; align-self: center;">
-				<div class="row justify-content-md-center">
-					<article class="col-md-auto">
-						<h3 class="text-center" style="color: #27D9C7; ">AÑADIR COMENTARIO</h3>
-						<form method="POST" th:action="@{/user/comentarios}" enctype="multipart/form-data" th:object="${comentario}"> 
-							<div class="row" style="margin-top:4rem; border:1px #27D9C7" >
-								<div class="col">
-									<div class="form-group">
-										<i class="bi bi-fonts" style="color: #27D9C7;"></i>
-										<input id="titulo" type="text" name="titulo" placeholder="Titulo" th:field="*{titulo}"
-											style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:3rem;"
-											required>
-									</div>
-									<div class="form-group">
-										<i class="bi bi-card-text" style="color: #27D9C7;"></i>
-										<textarea class="form-control" id="descripcion" rows="4"
-											placeholder="Comentario del Evento"  th:field="*{descripcion}"
-											style="color:#105952; outline: none; border: 2px solid #105952; margin-bottom:2rem;  margin-left:1.4rem;"></textarea>
-									</div>
-									<input id="id_evento" type="hidden" name="id_evento"  th:field="*{id_evento}"
-											th:value="${comentario.id_evento}" required>
+			<div class="col-sm-12 col-lg-8 color-card">
+				<div class="row justify-content-center">
+					<article class="col-sm-auto">
+						<h3 class="text-center icons">AÑADIR COMENTARIO</h3>
+						<form method="POST" th:action="@{/user/comentarios}" enctype="multipart/form-data"
+							th:object="${comentario}">
+							<div class="form-margen">
+								<div class="form-group">
+									<i class="bi bi-fonts icons"></i>
+									<input id="titulo" type="text" class="input-basic" name="titulo"
+										placeholder="Titulo" th:field="*{titulo}" required>
 								</div>
+								<div class="form-group">
+									<i class="bi bi-card-text icons"></i>
+									<textarea class="form-control input-area margin-area" id="descripcion" rows="4"
+										placeholder="Comentario del Evento" th:field="*{descripcion}"></textarea>
+								</div>
+								<input id="id_evento" type="hidden" name="id_evento" th:field="*{id_evento}"
+									th:value="${comentario.id_evento}" required>
 
-								<div class="row justify-content-md-center">
-									<button class="waves-effect waves-light btn " type="submit"
-										style="background-color: #27D9C7; color:white; border-radius: 20px; width:auto; padding:1rem; margin:1.5rem;">
+								<div class="row justify-content-center">
+									<button class="waves-effect waves-light btn boton-basic" type="submit">
 										COMENTAR</button>
 								</div>
 							</div>

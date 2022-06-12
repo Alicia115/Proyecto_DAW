@@ -5,23 +5,21 @@
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
-
-	<div class="" style="margin:10rem;">
-		<h3 class="text-center" style="color: #27D9C7; margin-bottom:2rem;">EVENTOS GUARDADOS</h3>
-		<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
-			<div class="card h-100" style="width: 18rem; margin:2rem; border:none;" th:each="event : ${eventos}">
-				<a th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}" style="text-decoration:none;">
+	<div class="contenedor">
+		<h3 class="text-center icons margin-bottom">EVENTOS GUARDADOS</h3>
+		<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+			<div class="card h-100 card-normal border-none" th:each="event : ${eventos}">
+				<a th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}">
 					<div style="max-width:100%; max-height:50%;"> 
 						<img th:src="@{'/img/'+${event.imagen}}" class="card-img-top" th:alt="${event.imagen}"
 							>
 					</div>
-
-					<div class="card-body" style="color:#22BFB0;">
+					<div class="card-body color-card">
 						<h5 class="card-title" th:text="${event.titulo}"></h5>
-						<h6 class="card-subtitle mb-2 " th:text="${event.tipo}" style="opacity: 80%;"></h6>
+						<h6 class="card-subtitle mb-2 opacity" th:text="${event.tipo}"></h6>
 						<p class="card-text" th:text="${event.lugar}"></p>
 						<p class="card-text" th:text="${event.coste}"></p>
-						<p class="card-text" th:text="${event.fecha}" style="color:#52E1D2;"></p>
+						<p class="card-text color-date" th:text="${event.fecha}"></p>
 					</div>
 				</a>
 			</div>

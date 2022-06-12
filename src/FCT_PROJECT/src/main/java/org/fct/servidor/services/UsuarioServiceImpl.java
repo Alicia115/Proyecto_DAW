@@ -1,8 +1,11 @@
 package org.fct.servidor.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.fct.servidor.dto.UsuarioLoginDTO;
+import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Usuario;
 import org.fct.servidor.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +62,9 @@ public class UsuarioServiceImpl implements UsuarioService{
 	@Override
 	public Usuario actualizarUsuario(Usuario usuario) {
 		
-		return userRepo.save(usuario);
+
+			return userRepo.save(usuario);
+		
 	}
 
 	@Override
@@ -69,6 +74,18 @@ public class UsuarioServiceImpl implements UsuarioService{
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public List<Usuario> getAllUsuarios() {
+		
+		List<Usuario> usuarioList = userRepo.findAll();
+
+		if (usuarioList != null && usuarioList.size() > 0) {
+			return usuarioList;
+		}
+
+		return new ArrayList<Usuario>();
 	}
 
 }

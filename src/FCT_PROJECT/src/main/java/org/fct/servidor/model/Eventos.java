@@ -50,6 +50,9 @@ public class Eventos implements Serializable {
 
 	@Column()
 	private String imagen;
+	
+	@Column()
+	private String url;
 
 	@OneToMany(mappedBy = "eventos", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Comentarios> comentariose = new HashSet<>();
@@ -143,6 +146,14 @@ public class Eventos implements Serializable {
 		this.imagen = imagen;
 	}
 
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public Set<Comentarios> getComentariose() {
 		return comentariose;
 	}
@@ -216,7 +227,7 @@ public class Eventos implements Serializable {
 			Comentarios comentario = iterator.next();
 	 
 	            if (comentario.getEvento().equals(this) &&
-	            		comentario.getUsuario().equals(usuario)) {
+	            		comentario.getUsuario().getId_usuario().equals(usuario.getId_usuario())) {
 	                iterator.remove();
 	                comentario.getUsuario().getComentariosu().remove(comentario);
 	                comentario.setEvento(null);
@@ -252,7 +263,7 @@ public class Eventos implements Serializable {
 			Valoracion valoracion = iterator.next();
 	 
 	            if (valoracion.getEvento().equals(this) &&
-	            		valoracion.getUsuario().equals(usuario)) {
+	            		valoracion.getUsuario().getId_usuario().equals(usuario.getId_usuario())) {
 	                iterator.remove();
 	                valoracion.getUsuario().getValoracionu().remove(valoracion);
 	                valoracion.setEvento(null);

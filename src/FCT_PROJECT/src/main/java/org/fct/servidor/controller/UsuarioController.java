@@ -239,7 +239,7 @@ public class UsuarioController {
 		usuariodto.setApellidos(usuario.getApellidos());
 		usuariodto.setEmail(usuario.getEmail());
 		usuariodto.setUsername(usuario.getUsername());
-		usuariodto.setPassword(usuario.getPassword());
+		//usuariodto.setPassword(usuario.getPassword());
 
 		System.out.println(usuario);
 		// System.out.println(usuario.getNombre());
@@ -254,14 +254,14 @@ public class UsuarioController {
 
 		String error = null;
 		String username = auth.getName();
-		String newPassword = new BCryptPasswordEncoder(15).encode(usuario.getNewpassword());
+		//String newPassword = new BCryptPasswordEncoder(15).encode(usuario.getNewpassword());
 		Usuario user = userService.getUsuarioByUserName(username);
 		Usuario nuevo_usuario = userService.getUsuarioByUserName(username);
 		nuevo_usuario.setNombre(usuario.getNombre());
 		nuevo_usuario.setApellidos(usuario.getApellidos());
 		nuevo_usuario.setEmail(usuario.getEmail());
-		nuevo_usuario.setUsername(usuario.getUsername());
-
+		//nuevo_usuario.setUsername(usuario.getUsername());
+/*
 		if (!"".equals(usuario.getNewpassword()) && !"".equals(usuario.getPassword())) {
 
 			if (comprobarPassword(usuario.getPassword(), newPassword, username)) {
@@ -269,7 +269,7 @@ public class UsuarioController {
 			}else {
 				return "redirect:/user/perfil?error=error";
 			}
-		} 
+		} */
 		
 		userService.actualizarUsuario(nuevo_usuario);
 		

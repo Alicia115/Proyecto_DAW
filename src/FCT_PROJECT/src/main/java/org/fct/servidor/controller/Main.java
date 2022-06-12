@@ -26,65 +26,64 @@ public class Main {
 
 	@Autowired
 	UsuarioServiceImpl usuarioService;
-	
+
 	@Autowired
 	EventosServiceImpl eventosService;
 
 	@GetMapping("/")
-	public String home(@RequestParam(required=false,name="error") String error, Model model) {
-		
+	public String home(@RequestParam(required = false, name = "error") String error, Model model) {
+
 		EventosDTO eventdto = new EventosDTO();
 		List<Eventos> eventos = eventosService.getAllEventos();
 		List<Eventos> eventoslista = eventosService.getAllEventosByTipo();
 		List<Eventos> eventoslistalugar = eventosService.getAllEventosByLugar();
-		model.addAttribute("eventoslistalugar",eventoslistalugar);
-		model.addAttribute("eventoslista",eventoslista);
-		model.addAttribute("eventos",eventos);
-		model.addAttribute("eventdto",eventdto);
-		model.addAttribute("error",error);
+		List<Usuario> usuarios = usuarioService.getAllUsuarios();
+
+		model.addAttribute("usuarios", usuarios);
+		model.addAttribute("eventoslistalugar", eventoslistalugar);
+		model.addAttribute("eventoslista", eventoslista);
+		model.addAttribute("eventos", eventos);
+		model.addAttribute("eventdto", eventdto);
+		model.addAttribute("error", error);
 		model.addAttribute("contenido", "INICIO");
 		return "index";
 	}
-	
+
 	@PostMapping("/")
-	public String postHome(@ModelAttribute EventosDTO eventdto,Model model) {
-		
+	public String postHome(@ModelAttribute EventosDTO eventdto, Model model) {
+
 		String tipo = eventdto.getTipo();
 		String fecha = eventdto.getFecha();
 		String lugar = eventdto.getLugar();
 		System.out.println(lugar);
 		System.out.println(tipo);
 		System.out.println(fecha);
-			
-		return "redirect:/eventos/listaEventos?tipo="+tipo+"&lugar="+lugar+"&fecha="+fecha;	
 
-	} 
-	
-	
+		return "redirect:/eventos/listaEventos?tipo=" + tipo + "&lugar=" + lugar + "&fecha=" + fecha;
+
+	}
 
 	@GetMapping("/login")
-	public String loginGet(@RequestParam(required = false, name = "error") String error,Model model) {
+	public String loginGet(@RequestParam(required = false, name = "error") String error, Model model) {
 
-		model.addAttribute("usuario", new UsuarioLoginDTO() );
+		model.addAttribute("usuario", new UsuarioLoginDTO());
 		model.addAttribute("error", error);
 		return "loginUser";
 	}
 
 	@PostMapping("/login")
-	public String loginPost(@ModelAttribute UsuarioLoginDTO usuario, Model model) {	
-		System.out.println("no se ha iniciado");
-			
-		if(usuarioService.loginUsuario(usuario)!=null) {
-			System.out.println(usuario.getUsername());
+	public String loginPost(@ModelAttribute UsuarioLoginDTO usuario, Model model) {
+
+		if (usuarioService.loginUsuario(usuario) != null) {
 			return "redirect:/";
 		}
-		
+
 		return "redirect:/login?error=error";
 
 	}
 
 	@GetMapping("/register")
-	public String registerGet(@RequestParam(required = false, name = "error") String error,Model model) {
+	public String registerGet(@RequestParam(required = false, name = "error") String error, Model model) {
 
 		UsuarioDTO userDTO = new UsuarioDTO();
 		model.addAttribute("usuario", userDTO);
@@ -94,7 +93,7 @@ public class Main {
 
 	@PostMapping("/register")
 	public String registerPost(@ModelAttribute UsuarioDTO usuario) {
-		
+
 		Usuario userBD = new Usuario();
 		userBD.setActivo(true);
 		userBD.setNombre(usuario.getNombre());
@@ -110,5 +109,5 @@ public class Main {
 
 		return "redirect:/";
 	}
-	
+
 }

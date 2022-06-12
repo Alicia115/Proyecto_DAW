@@ -5,61 +5,107 @@
 </head>
 
 <body>
-	<header th:insert="fragments/parts::menu"></header>
-
-	<div class="container" style="margin-top:10rem; margin-bottom:10rem;">
-		<div class="row justify-content-around" style="margin-top:2rem;">
-			<div class="col-4 ">
-				<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid " th:alt="${event.imagen}" style="width:80%;">
-				<div style="margin-top:2rem; color: #22BFB0; align-self: center;">
-					<h2 th:text="${event.titulo}" style="margin-left: 1rem;"></h2>
-					<h5 th:text="${event.tipo}" style="margin-left: 1.5rem;"></h5>
-					<h6 th:text="${event.lugar}" style="margin-left: 1.5rem;"></h6>
-					<div class="row justify-content-around" style="margin:2rem;">
-						<div class="col-2">
-							<div class="d-flex justify-content-center">
-								<a class="text-center col-2 btn btn-primary"
-									th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}"
-									style="background-color: #27D9C7; color:white; border-radius: 20px;border:none; width:auto; padding:1rem; margin:1.5rem;">Volver</a>
-							</div>
-						</div>
-						<div class="col-2">
-							<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
-								<a class="text-center col-2 btn btn-primary"
-									th:href="@{'/user/comentarios?evento='+${event.getId_evento()}}"
-									style="background-color: #27D9C7; color:white; border-radius: 20px;border:none; width:auto; padding:1rem; margin:1.5rem;">Comentar</a>
-							</div>
-						</div>
-
+	<div sec:authorize="hasRole('ROLE_USER') or !isAuthenticated()">
+		<header th:insert="fragments/parts::menu"></header>
+		<div class="container contenedor">
+			<div class="row justify-content-around">
+				<div class="col-sm-12 col-lg-4">
+					<div class="row justify-content-center">
+						<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}">
 					</div>
-
-
-				</div>
-			</div>
-
-			<div class="col-8" style="color: #22BFB0; align-self: center;">
-				<h3 th:text="#{comentarios}" style="text-align: center; margin-bottom:2rem;"> </h3>
-				<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
-					<div class="card" style="width: 18rem; margin:2rem; border-color: #27d9c7;"
-						th:each="e : ${event.comentariose}">
-						<div class="card-body">
-							<h5 class="card-title" th:text="${e.titulo}"></h5>
-							<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
-							<p class="card-text" style="color: #105952; text-align: justify;"
-								th:text="${e.descripcion}"></p>
-							<a th:href="@{|/admin/deletecomentarios?evento=${e.getEvento().getId_evento()}&usuario=${e.getUsuario().getId_usuario()}}|" class="card-link" style="text-decoration: none; color: #22BFB0;" sec:authorize="hasRole('ROLE_ADMIN')">Borrar
-								Comentario</a>
+					<div class="row justify-content-center">
+						<div class="row justify-content-center color-card form-margen widh-80">
+							<h2 th:text="${event.titulo}"></h2>
+							<h5 th:text="${event.tipo}"></h5>
+							<h6 th:text="${event.lugar}"></h6>
+						</div>
+						<div class="row justify-content-around form-margen margin-bottom">
+							<div class="col-2">
+								<div class="d-flex justify-content-center">
+									<a class="text-center col-2 btn btn-primary boton-basic"
+										th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}"
+										th:text="#{volver}"></a>
+								</div>
+							</div>
+							<div class="col-2">
+								<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
+									<a class="text-center col-2 btn btn-primary boton-basic" th:text="#{comentar}"
+										th:href="@{'/user/comentarios?evento='+${event.getId_evento()}}"></a>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 
-
+				<div class="col-sm-12 col-lg-8 color-card">
+					<h3 class="text-center margin-bottom" th:text="#{comentarios}"></h3>
+					<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+						<div class="card card-normal border-color" th:each="e : ${event.comentariose}">
+							<div class="card-body">
+								<h5 class="card-title" th:text="${e.titulo}"></h5>
+								<h6 class="card-subtitle mb-2 text-right" th:text="${e.fecha}"></h6>
+								<p class="card-text color-label text-justify" th:text="${e.descripcion}"></p>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
+		</div>
 
+		<footer th:replace="fragments/parts::footer"></footer>
+	</div>
+
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<div class="row justify-content-center">
+			<div class="col-2 col-sm-1 col-md-2 col-lg-3 col-xl-2">
+				<div th:replace="fragments/adminparts::menu"></div>
+			</div>
+			<div class="col-10 col-sm-11 col-md-10 col-lg-9 col-xl-10">
+				<div class="admin-container-event padding-right tamanio-eventinfo">
+					<div class="row justify-content-around">
+						<div class="col-sm-12 col-lg-4">
+							<div class="row justify-content-center">
+								<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid widh-80"
+									th:alt="${event.imagen}">
+							</div>
+							<div class="row justify-content-center">
+								<div class="row justify-content-center color-card form-margen widh-80">
+									<h2 th:text="${event.titulo}"></h2>
+									<h5 th:text="${event.tipo}"></h5>
+									<h6 th:text="${event.lugar}"></h6>
+								</div>
+								<div class="row justify-content-around form-margen margin-bottom">
+									<div class="col-2">
+										<div class="d-flex justify-content-center">
+											<a class="text-center col-2 btn btn-primary boton-basic"
+												th:href="@{'/eventos/infoEvento?evento='+${event.getId_evento()}}"
+												th:text="#{volver}"></a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-sm-12 col-lg-8 color-card">
+							<h3 class="text-center margin-bottom" th:text="#{comentarios}"></h3>
+							<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+								<div class="card card-normal border-color" th:each="e : ${event.comentariose}">
+									<div class="card-body">
+										<h5 class="card-title" th:text="${e.titulo}"></h5>
+										<h6 class="card-subtitle mb-2 text-right" th:text="${e.fecha}"></h6>
+										<p class="card-text color-label text-justify" th:text="${e.descripcion}"></p>
+										<a th:href="@{|/admin/deletecomentarios?evento=${e.getEvento().getId_evento()}&usuario=${e.getUsuario().getId_usuario()}|}"
+											class="card-link color-card" th:text="#{delete.comentario}"></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
-	<footer th:replace="fragments/parts::footer"></footer>
 
 </body>
 

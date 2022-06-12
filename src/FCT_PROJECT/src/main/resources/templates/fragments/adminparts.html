@@ -1,0 +1,62 @@
+<meta charset="UTF-8">
+
+
+<div class="" th:fragment="menu">
+	<nav class="sidebar close">
+		<header>
+			<div class="image-text">
+				<span class="image">
+					<a href="/">
+						<img src="/img/logo.png" alt="logo">
+					</a>
+				</span>
+
+				<div class="text header-text">
+					<span class="name" th:text="#{admin}"> </span>
+				</div>
+			</div>
+		</header>
+
+		<div class="menu-bar form-margen">
+			<div class="">
+				<ul class="menu-links">
+					<li class="nav-link">
+						<a href="/">
+							<i class="bi bi-house icon toggle"></i>
+							<span class="text nav-text" th:text="#{menu.home}"> </span>
+						</a>
+					</li>
+					<li class="nav-link">
+						<a href="/admin/listaUsuarios">
+							<i class="bi bi-person-lines-fill toggle icon"></i>
+							<span class="text nav-text" th:text="#{usuarios}"> </span>
+						</a>
+					</li>
+					<li class="nav-link">
+						<a href="/eventos/listaEventos">
+							<i class="bi bi-calendar-range toggle icon"></i>
+							<span class="text nav-text" th:text="#{eventos}"> </span>
+						</a>
+					</li>
+					<li class="nav-link">
+						<a href="/eventos/addEventos">
+							<i class="bi bi-calendar-plus toggle icon"></i>
+							<span class="text nav-text" th:text="#{menu.addEvent}"> </span>
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div class="bottom-content">
+				<li class="margin-bottom-4">
+					<a href="/logout">
+						<i class="bi bi-door-closed-fill icon"></i>
+						<span class="text nav-text" th:text="#{logout}"></span>
+					</a>
+				</li>
+			</div>
+
+		</div>
+
+	</nav>
+</div>

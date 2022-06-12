@@ -1,93 +1,100 @@
 <meta charset="UTF-8">
 <header th:fragment="menu">
-	<div class="fixed-top" style="background-color: #27D9C7;">
-		<nav class="navbar navbar-expand-lg ">
-			<div class="container-fluid row justify-content-between">
-				<div class="navbar-brand col-4">
-					<img src="/img/logo.png" class="rounded float-start" alt="logo"
-						style="width: 80px; margin:0.3rem; margin-left:3rem;">
-				</div>
-				<div class="collapse navbar-collapse d-flex col-4" id="navbarScroll" style="justify-content: end;">
-					<div style="margin-left: 4rem;">
-						<a class="nav-link text-white" href="/" style="margin-right: 3rem;">Inicio</a>
-					</div>
-					<div style="margin-left: 4rem;">
-						<a class="nav-link text-white" href="/eventos/listaEventos" style="margin-right: 3rem;">Buscar
-							Eventos</a>
-					</div>
-					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
-						<a class="nav-link text-white" href="/user/guardados" style="margin-right: 3rem;">Guardados</a>
-					</div>
-					<div style="margin-left: 4rem;">
-						<a class="nav-link text-white" href="/eventos/addEventos" style="margin-right: 3rem;"
-							sec:authorize="hasRole('ROLE_ADMIN')">Añadir Evento</a>
-					</div>
-					<div style="margin-left: 4rem;" sec:authorize="hasRole('ROLE_USER')">
-						<a class="nav-link text-white" href="/user/perfil" style="margin-right: 3rem;">Perfil</a>
-					</div>
-					<ul class="navbar-nav" style="--bs-scroll-height: 100px;" sec:authorize="!isAuthenticated()">
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-facebook"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-twitter"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
-						</li>
-					</ul>
-					<div style="margin-left: 4rem;" sec:authorize="isAuthenticated()">
-						<a class="nav-link text-white" href="/logout" style="margin-right: 3rem;">Logout</a>
-					</div>
+	<nav class="navbar navbar-dark navbar-expand-sm fixed-top background ">
+		<a href="/" class="navbar-brand">
+			<img src="/img/logo.png" class="rounded float-start logo" alt="logo">
+		</a>
 
-					<div style="margin-left: 4rem;" sec:authorize="!isAuthenticated()">
-						<a class="nav-link text-white" href="/login" style="margin-right: 3rem;">Iniciar Sesión</a>
-					</div>
-				</div>
-			</div>
-		</nav>
-	</div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+
+		<div id="navbarCollapse" class="collapse navbar-collapse ">
+			<ul class="navbar-nav ml-auto ">
+				<li class="nav-item">
+					<a href="/" class="nav-link active">
+						<i class="bi bi-house icon toggle"></i>
+						<span class="text nav-text" th:text="#{menu.home}"> </span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="/eventos/listaEventos" class="nav-link active">
+						<i class="bi bi-calendar-range toggle icon"></i>
+						<span class="text nav-text" th:text="#{eventos}"> </span>
+					</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link active" href="/user/guardados" sec:authorize="hasRole('ROLE_USER')">
+						<i class="bi bi-bucket-fill toggle icon"></i>
+						<span class="text nav-text" th:text="#{menu.eventoGuardado}"> </span>
+					</a>
+				</li>
+				
+				<li class="nav-item">
+					<a class="nav-link active" href="/user/perfil" sec:authorize="hasRole('ROLE_USER')">
+						<i class="bi bi-person-square toggle icon"></i>
+						<span class="text nav-text" th:text="#{perfil}"> </span>
+					</a>
+				</li>
+
+				<ul class="navbar-nav " style="--bs-scroll-height: 100px;" sec:authorize="!isAuthenticated()">
+					<li class="nav-item item">
+						<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
+					</li>
+					<li class=" item">
+						<a class="nav-link text-white" href="#"><i class="bi bi-facebook"></i></a>
+					</li>
+					<li class=" item">
+						<a class="nav-link text-white" href="#"><i class="bi bi-twitter"></i></a>
+					</li>
+					<li class="item">
+						<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
+					</li>
+				</ul>
+				<li class="nav-item">
+					<a class="nav-link active" href="/logout" sec:authorize="isAuthenticated()">
+						<i class="bi bi-door-closed-fill icon"></i>
+						<span class="text nav-text" th:text="#{logout}"></span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="/login" sec:authorize="!isAuthenticated()">
+						<i class="bi bi-door-open-fill toggle icon"></i>
+						<span class="text nav-text" th:text="#{menu.login }"> </span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
 </header>
 
+<footer class="text-center fixed-bottom">
+	<nav class="navbar navbar-expand-sm background">
+		<a href="/" class="navbar-brand">
+			<img src="/img/logo.png" class="rounded float-start logofooter" alt="logo">
+		</a>
+		<ul class="menu navbar-collapse">
+			<li class="item "><a href="#"><span th:text="#{footer.aboutus}"> </span></a></li>
+			<li class="item "><a href="#"><span th:text="#{footer.propon}"> </span></a></li>
+			<li class="item button active "><a href="#"><span th:text="#{footer.termns}"> </span></a></li>
+			<ul class="navbar-nav " style="--bs-scroll-height: 100px;" sec:authorize="isAuthenticated()">
+				<li class="nav-item item">
+					<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
+				</li>
+				<li class=" item">
+					<a class="nav-link text-white" href="#"><i class="bi bi-facebook"></i></a>
+				</li>
+				<li class=" item">
+					<a class="nav-link text-white" href="#"><i class="bi bi-twitter"></i></a>
+				</li>
+				<li class="item">
+					<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
+				</li>
+			</ul>
+			<li class="item button secondary padding-right"><a href="#">© 2022 Copyright</a></li>
 
-
-<footer class="text-center text-white fixed-bottom">
-	<div>
-		
-		<div class="row" style="background-color: #27D9C7;">
-			<div class="col">
-				<img src="/img/logo.png" class="rounded float-start" alt="logo"
-					style="width: 70px; margin:0.5rem; margin-left:3rem;">
-			</div>
-			<div class="col" style="align-self: center;">
-				<a class="text-white" href="#!" style="text-decoration:none;">Sobre Nosotros</a>
-			</div>
-			<div class="col" style="align-self: center;">
-				<a class="text-white" href="#!" style="text-decoration:none;">¿Nos propones algún evento?</a>
-			</div>
-			<div class="col" style="align-self: center;">
-				<a class="text-white" href="#!" style="text-decoration:none;">Términos y Condiciones</a>
-			</div>
-			<nav class="col navbar navbar-expand-lg " style="align-self: center;">
-				<ul class="navbar-nav" style="--bs-scroll-height: 100px;" sec:authorize="isAuthenticated()">
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-linkedin"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-facebook"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-twitter"></i></a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link text-white" href="#"><i class="bi bi-instagram"></i></a>
-						</li>
-					</ul>
-			</nav>
-			<div class="col text-white" style="align-self: center;"> © 2022 Copyright</div>
-		</div>
-	</div>
+		</ul>
+	</nav>
 </footer>

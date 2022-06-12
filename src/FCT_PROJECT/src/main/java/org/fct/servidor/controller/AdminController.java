@@ -7,12 +7,13 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.fct.servidor.dto.EventoInfoDTO;
+import org.fct.servidor.dto.EventosDTO;
+import org.fct.servidor.dto.UsuarioAdminDTO;
 import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Usuario;
 import org.fct.servidor.services.EventosServiceImpl;
 import org.fct.servidor.services.UsuarioServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -121,15 +122,60 @@ public class AdminController {
 		return "redirect:/eventos/listaEventos";
 	}
 	
-	@GetMapping("/admin/deletecomentarios")
-	public String userDeleteComentarios(@RequestParam(required = false, name = "error") String error, Model model,
-			 @RequestParam(required = false, name = "evento") String evento, @RequestParam(required = false, name = "usuario") String usuario) {
+	@GetMapping("/admin/listaUsuarios")
+	public String usuarioListado( Model model) {
+		
+		List<Usuario> usuarios = userService.getAllUsuarios();
+		
+		model.addAttribute("usuarios",usuarios);
+		return "usuariosLista";
+	}
+
+	@GetMapping("/admin/deleteUser")
+	public String deleteUsuario( Model model, @RequestParam(required = false, name = "usuario") String usuario) {
 		
 		Usuario user = userService.findUsuarioById(Long.parseLong(usuario));
-		System.out.println(user);
-		Eventos event = eventosService.findEventosById(Long.parseLong(evento));
-		System.out.println(event);
+		user.setActivo(false);
+		userService.actualizarUsuario(user);
+		
+		return "redirect:/admin/listaUsuarios";
+	}
+	
+	@GetMapping("/admin/editUser")
+	public String editUsuario( @RequestParam(required = false, name = "usuario") String usuario, Model model) {
+		
+		Usuario user = userService.findUsuarioById(Long.parseLong(usuario));
+		UsuarioAdminDTO userdto = new UsuarioAdminDTO();
+		userdto.setId_usuario(user.getId_usuario());
+		userdto.setId_role(user.getId_role());
+		
+		model.addAttribute("userdto",userdto);
+		return "editUsuarioAdmin";
+	}
+	
+	@PostMapping("/admin/editUser")
+	public String editUsuarioPost(@ModelAttribute UsuarioAdminDTO user) {
+		
+		Usuario usuario = userService.findUsuarioById(user.getId_usuario());
+		usuario.setId_role(user.getId_role());
+		
+		System.out.println(usuario);
+		
+		userService.actualizarUsuario(usuario);
+		
+		return "redirect:/admin/listaUsuarios";
+	}
+	
+	@GetMapping("/admin/deletecomentarios")
+	public String userDeleteComentarios(@RequestParam(required = false, name = "error") String error, Model model,
+			 @RequestParam(required = false, name = "evento") Long evento, @RequestParam(required = false, name = "usuario") Long usuario) {
+		
+		Usuario user = userService.findUsuarioById(usuario);
+		System.out.println("Usuario "+user);
+		Eventos event = eventosService.findEventosById(evento);
+		System.out.println("Evento "+event);
 		event.removeComment(user);
+		System.out.println(eventosService.actualizarEvento(event));
 		eventosService.actualizarEvento(event);
 		
 		return "redirect:/eventos/comentarios?evento="+evento;

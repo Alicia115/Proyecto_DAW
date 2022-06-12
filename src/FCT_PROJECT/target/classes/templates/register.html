@@ -5,45 +5,39 @@
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
-	<section class="container" style="margin-top:10rem; margin-bottom:8rem;">
-		<div class="row justify-content-md-center">
-			<article class="col-md-auto">
-				<h3 class="text-center" style="color: #27D9C7; margin-top:3rem;" th:text="#{register}"></h3>
+	<section class="container contenedor">
+		<div class="row justify-content-sm-center">
+			<article class="col-sm-auto">
+				<h3 class="text-center icons form-margen" th:text="#{register}"></h3>
 				<form method="POST" action="#" th:action="@{/register}" th:object="${usuario}">
 					<div style="margin-top:2rem;">
 						<div class="form-group">
-							<i class="bi bi-person-fill" style="color: #27D9C7;"></i>
-							<input id="nombre" type="text" name="nombre" placeholder="Nombre" th:field="*{nombre}"
-								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-								required>
+							<i class="bi bi-person-fill icons"></i>
+							<input id="nombre" class="input-basic" type="text" name="nombre" placeholder="Nombre"
+								th:field="*{nombre}" required>
 						</div>
 						<div class="form-group">
-							<i class="bi bi-people-fill" style="color: #27D9C7;"></i>
-							<input id="apellidos" type="text" name="apellidos" placeholder="Apellidos" th:field="*{apellidos}"
-								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-								>
+							<i class="bi bi-people-fill icons"></i>
+							<input id="apellidos" class="input-basic" type="text" name="apellidos"
+								placeholder="Apellidos" th:field="*{apellidos}">
 						</div>
 						<div class="form-group">
-							<i class="bi bi-envelope-fill" style="color: #27D9C7;"></i>
-							<input id="email" type="text" name="email" placeholder="Email" th:field="*{email}"
-								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-								required>
+							<i class="bi bi-envelope-fill icons"></i>
+							<input id="email" type="text" class="input-basic" name="email" placeholder="Email"
+								th:field="*{email}" required>
 						</div>
 						<div class="form-group">
-							<i class="bi bi-person-circle" style="color: #27D9C7;"></i>
-							<input id="username" type="text" name="username" placeholder="Nombre de Usuario" th:field="*{username}"
-								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-								required>
+							<i class="bi bi-person-circle icons"></i>
+							<input id="username" type="text" name="username" placeholder="Nombre de Usuario"
+								th:field="*{username}" class="input-basic" required>
 						</div>
 						<div class="form-group">
-							<i class="bi bi-lock-fill" style="color: #27D9C7;"></i>
-							<input id="password" type="password" name="password" placeholder="Contraseña" th:field="*{password}"
-								style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; margin-bottom:2rem;"
-								required>
+							<i class="bi bi-lock-fill icons"></i>
+							<input id="password" type="password" class="input-basic" name="password"
+								placeholder="Contraseña" th:field="*{password}" required>
 						</div>
 						<h6 class="text-danger" th:if="${error!=null}" th:text="#{'error.register'}"></h6>
-						<button class="waves-effect waves-light btn " type="submit"
-							style="background-color: #27D9C7; color:white; border-radius: 20px;">REGISTRAR</button>
+						<button class="waves-effect waves-light btn boton-basic" type="submit" th:text="#{registrar}"></button>
 
 					</div>
 

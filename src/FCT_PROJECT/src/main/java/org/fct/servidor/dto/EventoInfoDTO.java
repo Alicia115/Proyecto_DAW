@@ -11,7 +11,7 @@ public class EventoInfoDTO implements Serializable{
 	private String tipo;
 	private Double coste;
 	private String imagen;
-	
+	private String url;
 	
 	public EventoInfoDTO() {
 
@@ -85,6 +85,16 @@ public class EventoInfoDTO implements Serializable{
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
+	}
+
+
+	public String getUrl() {
+		return url;
+	}
+
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 	

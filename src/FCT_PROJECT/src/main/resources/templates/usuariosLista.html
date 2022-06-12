@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head th:replace="fragments/bootstrap::head(title='menu.listUser')"></head>
+
+<body>
+
+	<div class="col-2 col-sm-1 col-md-2 col-lg-3 col-xl-1">
+		<div th:insert="fragments/adminparts::menu"></div>
+	</div>
+
+	<div class="col-10 col-sm-11 col-md-10 col-lg-9 col-xl-11">
+		<div class=" admin-container ">
+		<h3 class="text-center margin-bottom" th:text="#{menu.listUser}"></h3>
+			<table class="table table-hover table-responsive tamanio-tabla-user">
+				<thead class="background color-blanco border-bottom">
+					<tr>
+						<th scope="col"> ID</th>
+						<th scope="col" th:text="#{name}"></th>
+						<th scope="col" th:text="#{surname}"></th>
+						<th scope="col" th:text="#{email}"></th>
+						<th scope="col" th:text="#{username}"></th>
+						<th scope="col" th:text="#{role}"></th>
+						<th scope="col" th:text="#{activo}"></th>
+						<th scope="col"> </th>
+						<th scope="col"> </th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="u : ${usuarios}" class="color-label">
+						<td th:text="${u.getId_usuario()}"></td>
+						<td th:text="${u.getNombre()}"></td>
+						<td th:text="${u.getApellidos()}"></td>
+						<td th:text="${u.getEmail()}"></td>
+						<td th:text="${u.getUsername()}"></td>
+						<td th:text="${u.getId_role()}"></td>
+						<td th:text="${u.isActivo()}"></td>
+						<td><a th:href="@{'/admin/editUser?usuario='+${u.getId_usuario()}}"><i
+									class="bi bi-pencil-square icons"></i></a>
+						</td>
+						<td><a th:href="@{'/admin/deleteUser?usuario='+${u.getId_usuario()}}"><i
+									class="bi bi-person-x-fill icons"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -5,27 +5,30 @@
 
 <body>
 	<header th:insert="fragments/parts::menu"></header>
-
-	<div class="" style="margin:10rem;">
-		<h3 class="text-center" style="color: #27D9C7; margin-bottom:3rem;" th:text="#{title.usercomentarios}"> </h3>
-
-		<div class="col-8" style="color: #22BFB0; align-self: center;">
-			<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-md-center">
-				<div class="card" style="width: 18rem; margin:2rem; border-color: #27d9c7;" th:each="e : ${eventos}">
+	<div class="contenedor">
+		<h3 class="text-center icons margin-bottom" th:text="#{title.usercomentarios}"></h3>
+		<div class="col-sm-auto color-card">
+			<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-end">
+				<div class="row justify-content-center">
+					<a class="text-center col-2 btn btn-primary boton-basic"
+						th:href="@{/user/perfil}" th:text="#{volver}"></a>
+				</div>
+			</div>
+			<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+				<div class="card card-normal border-color" th:each="e : ${eventos}">
 					<div class="card-body">
 						<h5 class="card-title" th:text="${e.titulo}"></h5>
-						<h6 class="card-subtitle mb-2 " style="text-align: right;" th:text="${e.fecha}"></h6>
-						<p class="card-text" style="color: #105952; text-align: justify;" th:text="${e.descripcion}">
-						</p>
-						<a th:href="@{'/user/comentarios?evento='+${e.getEvento().getId_evento()}}" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{editar}">
-							</a>
-						<a th:href="@{'/user/deletemiscomentarios?evento='+${e.getEvento().getId_evento()}}" class="card-link" style="text-decoration: none; color: #22BFB0;" th:text="#{borrar}">
-							</a>
+						<h6 class="card-subtitle mb-2 text-right" th:text="${e.fecha}"></h6>
+						<p class="card-text color-label text-justify" th:text="${e.descripcion}"></p>
+						<a th:href="@{'/user/comentarios?evento='+${e.getEvento().getId_evento()}}"
+							class="card-link color-card" th:text="#{editar}">
+						</a>
+						<a th:href="@{'/user/deletemiscomentarios?evento='+${e.getEvento().getId_evento()}}"
+							class="card-link color-card" th:text="#{borrar}">
+						</a>
 					</div>
 				</div>
 			</div>
-
-
 		</div>
 	</div>
 
