@@ -8,6 +8,7 @@
 	<section class="container contenedor">
 		<div class="row justify-content-center">
 			<article class="col-sm-auto">
+			<h3 class="text-center icons form-margen margin-bottom" th:text="#{datosuser}"></h3>
 				<form method="POST" th:action="@{/user/perfil}" enctype="multipart/form-data" th:object="${usuario}">
 					<div class="row justify-content-center form-margen">
 						<div class="col-sm-auto">

@@ -136,6 +136,10 @@ a:hover{
 	color:var(--secondary-color);
 }
 
+.card-admin-hover:hover{
+	color:var(--primary-color);
+}
+
 .btn:hover{
 	color:var(--secondary-color);
 	background:var(--primary-color);

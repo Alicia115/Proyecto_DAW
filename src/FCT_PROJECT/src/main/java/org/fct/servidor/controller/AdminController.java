@@ -55,16 +55,18 @@ public class AdminController {
 		eventoNuevo.setLugar(eventodto.getLugar());
 		eventoNuevo.setFecha(eventodto.getFecha());
 		eventoNuevo.setCoste(eventodto.getCoste());
+		eventoNuevo.setUrl(eventodto.getUrl());
 
 		if (!imagen.isEmpty()) {
-			Path directorioImagenes = Paths.get("src//main//resources//static/img");
-			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+			//Path directorioImagenes = Paths.get("src//main//resources//static/img");
+			//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 			// String ruta = "C://Temp//uploads";
+			String ruta = "/home/alicia/Temporal";
 
 			try {
 				byte[] bytesImg = imagen.getBytes();
-				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-				// Path rutaCompleta = Paths.get(ruta + "//" + imagen.getOriginalFilename());
+				//Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+				Path rutaCompleta = Paths.get(ruta + "/" + imagen.getOriginalFilename());
 				Files.write(rutaCompleta, bytesImg);
 
 				eventoNuevo.setImagen(imagen.getOriginalFilename());
@@ -79,7 +81,7 @@ public class AdminController {
 			// return "redirect:/grados/add?error=Existe&grado=" + grado.getNombre();
 		}
 
-		return "redirect:/";
+		return "redirect:/eventos/listaEventos";
 	}
 
 	@GetMapping("/eventos/editEvento")
@@ -98,14 +100,15 @@ public class AdminController {
 		
 	
 		if (!imagen.isEmpty()) {
-			Path directorioImagenes = Paths.get("src//main//resources//static/img");
-			String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
+			//Path directorioImagenes = Paths.get("src//main//resources//static/img");
+			//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
 			// String ruta = "C://Temp//uploads";
-
+			String ruta = "/home/alicia/Temporal";
+			
 			try {
 				byte[] bytesImg = imagen.getBytes();
-				Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-				// Path rutaCompleta = Paths.get(ruta + "//" + imagen.getOriginalFilename());
+				//Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
+				Path rutaCompleta = Paths.get(ruta + "/" + imagen.getOriginalFilename());
 				Files.write(rutaCompleta, bytesImg);
 
 				evento.setImagen(imagen.getOriginalFilename());

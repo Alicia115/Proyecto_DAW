@@ -17,6 +17,7 @@
 			<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
 				<div class="card card-normal border-color" th:each="e : ${eventos}">
 					<div class="card-body">
+						<h5 class="card-title text-center" th:text="${e.getEvento().getTitulo()}"> </h5>
 						<h5 class="card-title" th:text="${e.puntuacion}"></h5>
 						<h6 class="card-subtitle mb-2 text-right" th:text="${e.fecha}"></h6>
 						<a th:href="@{'/user/valoraciones?evento='+${e.getEvento().getId_evento()}}"
