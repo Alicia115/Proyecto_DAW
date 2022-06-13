@@ -109,5 +109,17 @@ public class Main {
 
 		return "redirect:/";
 	}
+	
+	@GetMapping("/sobreNosotros")
+	public String sobreNosotros(@RequestParam(required = false, name = "error") String error, Model model) {
+
+		return "sobreNosotros";
+	}
+	
+	@GetMapping("/terminosycondiciones")
+	public String Terminosycondiciones(@RequestParam(required = false, name = "error") String error, Model model) {
+
+		return "terminosycondiciones";
+	}
 
 }

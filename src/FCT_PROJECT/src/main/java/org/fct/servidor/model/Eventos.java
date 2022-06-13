@@ -43,9 +43,6 @@ public class Eventos implements Serializable {
 	private String tipo;
 
 	@Column(nullable = false)
-	private String hora;
-
-	@Column(nullable = false)
 	private Double coste;
 
 	@Column()
@@ -122,14 +119,6 @@ public class Eventos implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public String getHora() {
-		return hora;
-	}
-
-	public void setHora(String hora) {
-		this.hora = hora;
-	}
-
 	public Double getCoste() {
 		return coste;
 	}
@@ -198,7 +187,7 @@ public class Eventos implements Serializable {
 	@Override
 	public String toString() {
 		return "Eventos [id=" + id_evento + ", titulo=" + titulo + ", descripcion=" + descripcion + ", fecha=" + fecha
-				+ ", lugar=" + lugar + ", tipo=" + tipo + ", hora=" + hora + ", coste=" + coste + "]";
+				+ ", lugar=" + lugar + ", tipo=" + tipo + ",  coste=" + coste + "]";
 	}
 
 	// Métodos Helpers
@@ -237,9 +226,6 @@ public class Eventos implements Serializable {
 	}
 
 	public void addValoracion(Usuario usuario, LocalDate fecha, int puntuacion) {
-		/*Valoracion valoracion = new Valoracion(usuario, this, fecha, puntuacion);
-		this.valoracione.add(valoracion);
-		usuario.getValoracionu().add(valoracion);*/
 		
 		Valoracion valoracion = new Valoracion(usuario, this, fecha, puntuacion);
 		boolean encontrado = false;
@@ -281,37 +267,5 @@ public class Eventos implements Serializable {
         this.getUsuarios_guardados().remove(usuario);
         usuario.getEventos_guardados().remove(this);
     }
-	
-	/*
-	public void addGuardarEvento(Usuario usuario) {
-		GuardarEvento guardaEvento = new GuardarEvento(usuario, this);
-		boolean encontrado = false;
-		for (GuardarEvento eventos : guardarEventoe) {
-			if (eventos.getUserGuarEv().getId_usuario() == guardaEvento.getUserGuarEv().getId_usuario()
-					&& eventos.getEventGuarEv().getId_evento() == guardaEvento.getEventGuarEv().getId_evento()) {
-				encontrado = true;
-				break;
-			}
-		}
-		if (!encontrado) {
-			this.guardarEventoe.add(guardaEvento);
-			usuario.getGuardarEventou().add(guardaEvento);
-		}
-	}
-
-	public void removeGuardarEvento(Usuario usuario) {
-		GuardarEvento guardaEvento = new GuardarEvento(usuario, this);
-		boolean encontrado = false;
-		for (GuardarEvento eventos : guardarEventoe) {
-			if (eventos.getUserGuarEv().getId_usuario() == guardaEvento.getUserGuarEv().getId_usuario()
-					&& eventos.getEventGuarEv().getId_evento() == guardaEvento.getEventGuarEv().getId_evento()) {
-				encontrado = true;
-				usuario.getGuardarEventou().remove(guardaEvento);
-				this.guardarEventoe.remove(guardaEvento);
-				break;
-			}
-		}
-
-	}*/
 
 }
