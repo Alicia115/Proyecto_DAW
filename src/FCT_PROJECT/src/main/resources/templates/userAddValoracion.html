@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head th:replace="fragments/bootstrap::head(title='menu.comentarios')">
+<head th:replace="fragments/bootstrap::head(title='menu.addValoracion')">
 </head>
 
 <body>
@@ -10,7 +10,7 @@
 		<div class="row justify-content-around">
 			<div class="col-sm-12 col-lg-4">
 				<div class="row justify-content-center">
-					<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}"
+					<img th:src="@{'/photos/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}"
 						style="width:80%;">
 				</div>
 				<div class="row justify-content-center">
@@ -21,8 +21,8 @@
 					</div>
 					<div class="row justify-content-around form-margen margin-bottom">
 						<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
-							<a class="text-center col-2 btn btn-primary boton-basic"
-								th:href="@{'/eventos/valoraciones?evento='+${event.getId_evento()}}">Volver</a>
+							<a class="text-center col-2 btn btn-primary boton-basic" th:text="#{volver}"
+								th:href="@{'/eventos/valoraciones?evento='+${event.getId_evento()}}"></a>
 						</div>
 					</div>
 				</div>
@@ -31,16 +31,16 @@
 			<div class="col-sm-12 col-lg-8 color-card">
 				<div class="row justify-content-center">
 					<article class="col-sm-auto">
-						<h3 class="text-center icons">AÑADIR VALORACION</h3>
+						<h3 class="text-center icons" th:text="#{menu.addValoracion}"> </h3>
 						<form method="POST" th:action="@{/user/valoraciones}" enctype="multipart/form-data"
 							th:object="${valoracion}">
 							<div class="form-margen">
 								<div class="form-group">
 									<i class="bi bi-chat-square-heart-fill"></i>
 
-									<select name="tipo" th:field="*{puntuacion}" class="form-select form-select-sm"
-										aria-label=".form-select-sm example" style="color:#105952; outline: none; border:none; border-bottom: 2px solid #105952; 
-											margin-bottom:3rem; width:60%; border-radius:inherit;  margin-left:1.4rem;">
+									<select name="tipo" th:field="*{puntuacion}"
+										class="form-select form-select-sm input-date input-select"
+										aria-label=".form-select-sm example">
 										<option th:value="1">1</option>
 										<option th:value="2">2</option>
 										<option th:value="3">3</option>
@@ -51,8 +51,9 @@
 								<input id="id_evento" type="hidden" name="id_evento" th:field="*{id_evento}"
 									th:value="${valoracion.id_evento}" required>
 								<div class="row justify-content-center">
-									<button class="waves-effect waves-light btn boton-basic" type="submit">
-										VALORAR</button>
+									<button class="waves-effect waves-light btn boton-basic" type="submit"
+										th:text="#{valorar}">
+									</button>
 								</div>
 							</div>
 						</form>

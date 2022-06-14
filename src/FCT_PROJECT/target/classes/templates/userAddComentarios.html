@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 
-<head th:replace="fragments/bootstrap::head(title='menu.comentarios')">
+<head th:replace="fragments/bootstrap::head(title='menu.addComment')">
 </head>
 
 <body>
@@ -10,7 +10,7 @@
 		<div class="row justify-content-around">
 			<div class="col-sm-12 col-lg-4">
 				<div class="row justify-content-center">
-					<img th:src="@{'/img/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}"
+					<img th:src="@{'/photos/'+${event.imagen}}" class="img-fluid widh-80" th:alt="${event.imagen}"
 						style="width:80%;">
 				</div>
 				<div class="row justify-content-center">
@@ -22,7 +22,8 @@
 					<div class="row justify-content-around form-margen margin-bottom">
 						<div class="d-flex justify-content-center" sec:authorize="hasRole('ROLE_USER')">
 							<a class="text-center col-2 btn btn-primary boton-basic"
-								th:href="@{'/eventos/comentarios?evento='+${event.getId_evento()}}">Volver</a>
+								th:href="@{'/eventos/comentarios?evento='+${event.getId_evento()}}"
+								th:text="#{volver}"></a>
 						</div>
 					</div>
 				</div>
@@ -31,7 +32,7 @@
 			<div class="col-sm-12 col-lg-8 color-card">
 				<div class="row justify-content-center">
 					<article class="col-sm-auto">
-						<h3 class="text-center icons">AÑADIR COMENTARIO</h3>
+						<h3 class="text-center icons" th:text="#{menu.addComment}"> </h3>
 						<form method="POST" th:action="@{/user/comentarios}" enctype="multipart/form-data"
 							th:object="${comentario}">
 							<div class="form-margen">
@@ -49,8 +50,9 @@
 									th:value="${comentario.id_evento}" required>
 
 								<div class="row justify-content-center">
-									<button class="waves-effect waves-light btn boton-basic" type="submit">
-										COMENTAR</button>
+									<button class="waves-effect waves-light btn boton-basic" type="submit"
+										th:text="#{comentar}">
+									</button>
 								</div>
 							</div>
 						</form>

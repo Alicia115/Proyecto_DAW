@@ -1,13 +1,16 @@
 package org.fct.servidor.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.fct.servidor.dto.EventoInfoDTO;
-import org.fct.servidor.dto.EventosDTO;
 import org.fct.servidor.dto.UsuarioAdminDTO;
 import org.fct.servidor.model.Eventos;
 import org.fct.servidor.model.Usuario;
@@ -65,11 +68,12 @@ public class AdminController {
 
 			try {
 				byte[] bytesImg = imagen.getBytes();
+				String image = imagen.getOriginalFilename().replaceAll(" ", "");
 				//Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-				Path rutaCompleta = Paths.get(ruta + "/" + imagen.getOriginalFilename());
+				Path rutaCompleta = Paths.get(ruta + "/" + image);
 				Files.write(rutaCompleta, bytesImg);
 
-				eventoNuevo.setImagen(imagen.getOriginalFilename());
+				eventoNuevo.setImagen(image);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -86,7 +90,7 @@ public class AdminController {
 
 	@GetMapping("/eventos/editEvento")
 	public String editEventoGet(@RequestParam(name = "evento") String evento, Model model) {
-
+		
 		Eventos eventoedit = eventosService.findEventosById(Long.parseLong(evento));
 		List<Eventos> eventoslistatipo = eventosService.getAllEventosByTipo();
 		model.addAttribute("eventoslistatipo", eventoslistatipo);
@@ -98,7 +102,8 @@ public class AdminController {
 	public String editEventoPost(@ModelAttribute Eventos evento, 
 			@RequestParam(required = false, name = "file") MultipartFile imagen) {
 		
-	
+		Eventos event = eventosService.findEventosById(evento.getId_evento());
+		evento.setImagen(event.getImagen());
 		if (!imagen.isEmpty()) {
 			//Path directorioImagenes = Paths.get("src//main//resources//static/img");
 			//String rutaAbsoluta = directorioImagenes.toFile().getAbsolutePath();
@@ -107,11 +112,12 @@ public class AdminController {
 			
 			try {
 				byte[] bytesImg = imagen.getBytes();
+				String image = imagen.getOriginalFilename().replaceAll(" ", "");
 				//Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + imagen.getOriginalFilename());
-				Path rutaCompleta = Paths.get(ruta + "/" + imagen.getOriginalFilename());
+				Path rutaCompleta = Paths.get(ruta + "/" + image);
 				Files.write(rutaCompleta, bytesImg);
 
-				evento.setImagen(imagen.getOriginalFilename());
+				evento.setImagen(image);
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
