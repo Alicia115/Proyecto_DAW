@@ -11,7 +11,7 @@
 ## Descripción del Proyecto
 ¿No sabes qué hacer un domingo? ¿Nunca te enteras de los eventos que hay por tu ciudad o alrededores? ¿Sabías que durante todo el año es posible que haya alguna festividad cerca de tí? ¿No? ¡Eso dejará de ser un problema!
 
-¿Qué hacemos hoy? es un buscador web de eventos sociaculturales a nivel España. Desde conciertos u obras teatrales hasta ferias gastronómicas o carnavales. El usuario a través de diferentes filtros (fecha, tipo de actividad, provincia, coste, etc.) podrá encontrar los eventos más próximos a la provincia seleccionada y alrededores, y en caso de ser de pago acceder por medio de un enlace a la página oficial de venta de éste. 
+¿Qué hacemos hoy? es un buscador web de eventos sociaculturales a nivel España. Desde conciertos u obras teatrales hasta ferias gastronómicas o carnavales. El usuario a través de diferentes filtros (fecha, tipo de actividad y provincia) podrá encontrar los eventos más próximos a la provincia seleccionada y alrededores, y en caso de ser de pago acceder por medio de un enlace a la página oficial de venta de éste. 
 Mediante previo registro y acceso a su perfil, el usuario podrá guardar eventos o añadirlos a su calendario de notificaciones.
 Por su parte, el administrador será el encargado de añadir nuevos eventos.  
 
