@@ -81,9 +81,7 @@ public class AdminController {
 			}
 		}
 
-		if (eventosService.insertarEvento(eventoNuevo) == null) {
-			// return "redirect:/grados/add?error=Existe&grado=" + grado.getNombre();
-		}
+		eventosService.insertarEvento(eventoNuevo);
 
 		return "redirect:/eventos/listaEventos";
 	}
@@ -120,7 +118,6 @@ public class AdminController {
 				evento.setImagen(image);
 
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

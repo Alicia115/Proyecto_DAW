@@ -102,7 +102,6 @@ public class Main {
 		userBD.setEmail(usuario.getEmail());
 		userBD.setId_role("ROLE_USER");
 		userBD.setPassword(new BCryptPasswordEncoder(15).encode(usuario.getPassword()));
-		System.out.println(userBD);
 		if (usuarioService.insertUsuario(userBD) == null) {
 			return "redirect:/register?error=error";
 		}

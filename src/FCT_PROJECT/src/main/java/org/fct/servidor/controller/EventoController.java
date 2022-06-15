@@ -40,10 +40,6 @@ public class EventoController {
 		
 		EventosDTO eventodto = new EventosDTO();
 	
-		/**
-		Eventos eventoTipo = eventosService.getEventoByTipo(eventdto.getTipo());
-		Eventos eventoLugar = eventosService.getEventoByLugar(eventdto.getLugar());
-		Eventos eventoFecha = eventosService.getEventoByFecha(eventdto.getFecha());*/
 		model.addAttribute("eventoslistalugar",eventoslistalugar);
 		model.addAttribute("eventoslistatipo",eventoslistatipo);
 		model.addAttribute("eventoslista",eventoslista);
