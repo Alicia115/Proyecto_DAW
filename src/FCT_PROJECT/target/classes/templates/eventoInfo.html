@@ -49,7 +49,7 @@
 							<a class="text-center col-2 btn btn-primary boton-basic" th:href="@{${event.url}}"
 								th:text="#{interesa}"></a>
 						</div>
-						<div class="col-sm-6 col-lg-6">
+						<div class="col-sm-6 col-lg-6" sec:authorize="isAuthenticated()">
 							<a class="text-center col-2 btn btn-primary boton-basic"
 								th:href="@{'/user/addGuardados?evento='+${event.getId_evento()}}"
 								th:text="#{guardar}"></a>

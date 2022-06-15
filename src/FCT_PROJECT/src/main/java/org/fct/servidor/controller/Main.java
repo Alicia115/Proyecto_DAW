@@ -106,7 +106,7 @@ public class Main {
 			return "redirect:/register?error=error";
 		}
 
-		return "redirect:/";
+		return "redirect:/login";
 	}
 	
 	@GetMapping("/sobreNosotros")
